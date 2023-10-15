@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "72081620861",
+    "project_id": "underradar-2",
+    "storage_bucket": "underradar-2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:72081620861:android:fcb1f3cdfb295010c29614",
+        "android_client_info": {
+          "package_name": "com.example.underradarandroid"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "72081620861-5064drnq1rq3r1kkujhqp0hcms8q0kq0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCuU5Tmf0mqHbork7qokaIdHQwpjt3Rim4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "72081620861-5064drnq1rq3r1kkujhqp0hcms8q0kq0.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "72081620861-7lqiigetn884tck97qufgadfkdn9m019.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "ryan.underRadar"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
