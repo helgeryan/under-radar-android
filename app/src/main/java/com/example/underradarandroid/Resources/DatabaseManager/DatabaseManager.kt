@@ -32,7 +32,7 @@ object DatabaseManager {
           getEvents()
           getColleges()
           getClubs()
-          
+
           getNotifications("qyq883mpZqQlxjkBV2RcSdio4eV2")
           getSavedEvents("qyq883mpZqQlxjkBV2RcSdio4eV2")
      }
