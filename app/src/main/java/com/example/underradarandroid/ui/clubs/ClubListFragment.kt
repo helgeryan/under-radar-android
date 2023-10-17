@@ -7,7 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.underradarandroid.Adapter
 import com.example.underradarandroid.R
+import com.example.underradarandroid.Resources.DatabaseManager.DatabaseManager
 import com.example.underradarandroid.databinding.FragmentClubListBinding
 import com.example.underradarandroid.databinding.FragmentCollegeListBinding
 import com.example.underradarandroid.ui.colleges.CollegeListViewModel
@@ -21,28 +25,24 @@ class ClubListFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var viewModel: ClubListViewModel
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        // getting the employeelist
+        val clubList = DatabaseManager.clubs
+        // Assign employeelist to ItemAdapter
+        val itemAdapter = ClubAdapter(clubList)
+        // Set the LayoutManager that
+        // this RecyclerView will use.
+        val recyclerView: RecyclerView = view.findViewById(R.id.recycleView)
+        recyclerView.layoutManager = LinearLayoutManager(context)
+        // adapter instance is set to the
+        // recyclerview to inflate the items.
+        recyclerView.adapter = itemAdapter
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val clubListViewModel =
-            ViewModelProvider(this).get(ClubListViewModel::class.java)
-
-        _binding = FragmentClubListBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-
-        val textView: TextView = binding.textClubs
-        clubListViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
-        return root
+        return inflater.inflate(R.layout.fragment_club_list, container, false)
     }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(ClubListViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
-
 }
