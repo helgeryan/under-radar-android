@@ -3,14 +3,16 @@ package com.example.underradarandroid.ui.colleges
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
+import com.example.underradarandroid.MainActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.underradarandroid.Adapter
+import com.example.underradarandroid.Constants
 import com.example.underradarandroid.R
 import com.example.underradarandroid.databinding.FragmentCollegeListBinding
-import com.example.underradarandroid.databinding.FragmentDashboardBinding
-import com.example.underradarandroid.ui.dashboard.DashboardViewModel
 
 class CollegeListFragment : Fragment() {
 
@@ -22,27 +24,27 @@ class CollegeListFragment : Fragment() {
 
     private lateinit var viewModel: CollegeListViewModel
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val collegeListViewModel =
-            ViewModelProvider(this).get(CollegeListViewModel::class.java)
-
-        _binding = FragmentCollegeListBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-
-        val textView: TextView = binding.textColleges
-        collegeListViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
-        return root
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        // getting the employeelist
+        val employelist= Constants.getEmployeeData()
+        // Assign employeelist to ItemAdapter
+        val itemAdapter= Adapter(employelist)
+        // Set the LayoutManager that
+        // this RecyclerView will use.
+        val recyclerView: RecyclerView = view.findViewById(R.id.recycleView)
+        recyclerView.layoutManager = LinearLayoutManager(context)
+        // adapter instance is set to the
+        // recyclerview to inflate the items.
+        recyclerView.adapter = itemAdapter
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(CollegeListViewModel::class.java)
-        // TODO: Use the ViewModel
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(R.layout.fragment_college_list, container, false)
     }
 
 }
