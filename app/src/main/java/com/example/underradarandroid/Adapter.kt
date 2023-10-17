@@ -34,6 +34,6 @@ class Adapter(private val collegeList: Array<College>) : RecyclerView.Adapter<Ad
     // This class defines the ViewHolder object for each item in the RecyclerView
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val name: TextView = itemView.findViewById(R.id.tvName)
-        val email: TextView = itemView.findViewById(R.id.tvEmail)
+        val email: TextView = itemView.findViewById(R.id.tvLocation)
     }
 }

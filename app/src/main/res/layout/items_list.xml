@@ -26,16 +26,18 @@
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/black"
                 android:textSize="20sp"
+                android:fontFamily="@font/mont_semibold"
                 tools:text="Name" />
 
             <!--TextView for displaying Email -->
             <TextView
-                android:id="@+id/tvEmail"
+                android:id="@+id/tvLocation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textColor="#454545"
                 android:textSize="16sp"
+                android:fontFamily="@font/mont_semibold"
                 tools:text="Email" />
 
         </LinearLayout>
