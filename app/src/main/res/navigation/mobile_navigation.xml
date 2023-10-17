@@ -18,16 +18,16 @@
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.example.underradarandroid.ui.notifications.NotificationsFragment"
+        android:id="@+id/navigation_collegeList"
+        android:name="com.example.underradarandroid.ui.colleges.CollegeListFragment"
         android:label="@string/title_colleges"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_college_list" />
 
     <fragment
         android:id="@+id/navigation_clubs"
-        android:name="com.example.underradarandroid.ui.notifications.NotificationsFragment"
+        android:name="com.example.underradarandroid.ui.clubs.ClubListFragment"
         android:label="@string/title_clubs"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_club_list" />
     <fragment
         android:id="@+id/navigation_more"
         android:name="com.example.underradarandroid.ui.notifications.NotificationsFragment"
