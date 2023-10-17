@@ -12,5 +12,13 @@ data class College(
     var division: String? = null,
     var description: String? = null,
     var logo: String? = null,
-    var website: String? = null,
-)
+    var website: String? = null
+) {
+    fun getCollegeName(): String {
+        return this.name + " " + this.mascot
+    }
+
+    fun getLocation(): String {
+        return this.city + ", " + this.state
+    }
+}

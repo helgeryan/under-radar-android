@@ -1,17 +1,15 @@
 package com.example.underradarandroid.ui.colleges
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import com.example.underradarandroid.MainActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.underradarandroid.Adapter
-import com.example.underradarandroid.Constants
 import com.example.underradarandroid.R
+import com.example.underradarandroid.Resources.DatabaseManager.DatabaseManager
 import com.example.underradarandroid.databinding.FragmentCollegeListBinding
 
 class CollegeListFragment : Fragment() {
@@ -27,9 +25,9 @@ class CollegeListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         // getting the employeelist
-        val employelist= Constants.getEmployeeData()
+        val collegeList = DatabaseManager.colleges
         // Assign employeelist to ItemAdapter
-        val itemAdapter= Adapter(employelist)
+        val itemAdapter = Adapter(collegeList)
         // Set the LayoutManager that
         // this RecyclerView will use.
         val recyclerView: RecyclerView = view.findViewById(R.id.recycleView)
