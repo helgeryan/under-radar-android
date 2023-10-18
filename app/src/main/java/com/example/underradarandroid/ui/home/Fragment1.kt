@@ -9,8 +9,7 @@ import android.widget.ImageView
 import com.example.underradarandroid.R
 
 
-class Fragment1(id: Int) : Fragment() {
-    private val resourceId: Int = id
+class Fragment1(private val resourceId: Int) : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,12 +26,6 @@ class Fragment1(id: Int) : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val imageView: ImageView = view.findViewById(R.id.imageView)
-        when(resourceId) {
-            0 -> imageView.setImageResource(R.drawable.carousel1)
-            1 -> imageView.setImageResource(R.drawable.carousel2)
-            2 -> imageView.setImageResource(R.drawable.carousel3)
-            else -> imageView.setImageResource(R.drawable.carousel1)
-        }
-
+        imageView.setImageResource(resourceId)
     }
 }
