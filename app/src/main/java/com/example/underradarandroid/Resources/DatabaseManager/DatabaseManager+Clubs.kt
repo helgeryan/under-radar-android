@@ -12,7 +12,7 @@ fun DatabaseManager.getClubs() {
             try {
                 clubs = result.toObjects(Club::class.java).toTypedArray()
 
-                Log.d("UR Logging", clubs.toString())
+                Log.d("UR Logging Clubs", clubs.size.toString())
             } catch (e: RuntimeException) {
                 Log.d("Error", e.message.toString())
             }

@@ -11,7 +11,7 @@ fun DatabaseManager.getStories() {
             try {
                 stories = result.toObjects(Story::class.java).toTypedArray()
 
-                Log.d("UR Logging", stories.toString())
+                Log.d("UR Logging Stories", stories.size.toString())
             } catch (e: RuntimeException) {
                 Log.d("Error", e.message.toString())
             }

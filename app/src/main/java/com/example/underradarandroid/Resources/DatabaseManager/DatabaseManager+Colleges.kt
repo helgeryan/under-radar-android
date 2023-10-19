@@ -12,7 +12,7 @@ fun DatabaseManager.getColleges() {
             try {
                 colleges = result.toObjects(College::class.java).toTypedArray()
 
-                Log.d("UR Logging", colleges.toString())
+                Log.d("UR Logging Colleges", colleges.size.toString())
             } catch (e: RuntimeException) {
                 Log.d("Error", e.message.toString())
             }

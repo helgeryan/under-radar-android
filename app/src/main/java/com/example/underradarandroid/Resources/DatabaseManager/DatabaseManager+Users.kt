@@ -11,7 +11,7 @@ fun DatabaseManager.getUsers() {
             try {
                 users = result.toObjects(User::class.java).toTypedArray()
 
-                Log.d("UR Logging", users.toString())
+                Log.d("UR Logging Users", users.size.toString())
             } catch (e: RuntimeException) {
                 Log.d("Error", e.message.toString())
             }

@@ -11,7 +11,7 @@ fun DatabaseManager.getSavedEvents(userId: String) {
         .addOnSuccessListener { result ->
             try {
                 savedEvents = result.toObjects(SavedEvent::class.java).toTypedArray()
-                Log.d("UR Logging", savedEvents.toString())
+                Log.d("UR Logging Saved Events", savedEvents.size.toString())
             } catch (e: RuntimeException) {
                 Log.d("Error", e.message.toString())
             }

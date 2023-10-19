@@ -8,6 +8,7 @@ import com.google.firebase.ktx.Firebase
 
 object DatabaseManager {
      const val storiesCollection: String = "headlines"
+     const val conferenceCollection: String = "collegeConferences"
      const val usersCollection: String = "users"
      const val eventsCollection: String = "events"
      const val clubsCollection: String = "clubs"
@@ -21,12 +22,14 @@ object DatabaseManager {
      var events: Array<Event> = arrayOf()
      var savedEvents: Array<SavedEvent> = arrayOf()
      var notifications: Array<UserNotification> = arrayOf()
+     var collegeConferences: Array<CollegeConference> = arrayOf()
 
      init {
 
      }
 
      fun refresh() {
+          getConferences()
           getUsers()
           getStories()
           getEvents()

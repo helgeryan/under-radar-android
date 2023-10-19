@@ -7,6 +7,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.underradarandroid.DataClasses.College
+import com.example.underradarandroid.Resources.DatabaseManager.DatabaseManager
+import com.example.underradarandroid.Resources.DatabaseManager.getConferenceForId
 
 
 class CollegesAdapter(private val collegeList: Array<College>) : RecyclerView.Adapter<CollegesAdapter.MyViewHolder>() {
@@ -30,7 +32,13 @@ class CollegesAdapter(private val collegeList: Array<College>) : RecyclerView.Ad
         val college = collegeList[position]
         holder.name.text = college.getCollegeName()
         holder.email.text = college.getLocation()
-        holder.division.text = college.id
+        val conferenceId = college.conferenceId
+        conferenceId?.let {
+            val conference = DatabaseManager.getConferenceForId(conferenceId)
+            conference?.let {
+                holder.division.text = conference.division
+            }
+        }
     }
 
     // This class defines the ViewHolder object for each item in the RecyclerView

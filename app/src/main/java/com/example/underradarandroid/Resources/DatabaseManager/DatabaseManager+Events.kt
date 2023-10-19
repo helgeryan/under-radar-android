@@ -11,7 +11,7 @@ fun DatabaseManager.getEvents() {
             try {
                 events = result.toObjects(Event::class.java).toTypedArray()
 
-                Log.d("UR Logging", events.toString())
+                Log.d("UR Logging Events", events.size.toString())
             } catch (e: RuntimeException) {
                 Log.d("Error", e.message.toString())
             }

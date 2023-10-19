@@ -11,7 +11,7 @@ fun DatabaseManager.getNotifications(userId: String) {
         .addOnSuccessListener { result ->
             try {
                 notifications = result.toObjects(UserNotification::class.java).toTypedArray()
-                Log.d("UR Logging", notifications.toString())
+                Log.d("UR Logging Notifications", notifications.size.toString())
             } catch (e: RuntimeException) {
                 Log.d("Error", e.message.toString())
             }
