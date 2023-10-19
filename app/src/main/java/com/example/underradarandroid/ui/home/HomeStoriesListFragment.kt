@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.underradarandroid.Adapter
 import com.example.underradarandroid.R
 import com.example.underradarandroid.Resources.DatabaseManager.DatabaseManager
 import com.example.underradarandroid.ui.stories.StoriesAdapter

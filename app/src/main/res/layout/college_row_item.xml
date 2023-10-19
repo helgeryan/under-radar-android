@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/llMain"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:padding="10dp">
+
+    <!--LinearLayout orientation Vertical -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="1dp"
+            android:orientation="horizontal">
+
+            <!--TextView for displaying Name -->
+            <TextView
+                android:id="@+id/nameText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                android:fontFamily="@font/mont_semibold"
+                tools:text="Name" />
+
+            <ImageView
+                android:id="@+id/commitImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="7dp"
+
+                />
+
+            <ImageView
+                android:id="@+id/coachesImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="7dp"
+
+
+                />
+
+        </LinearLayout>
+
+        <!--TextView for displaying Email -->
+        <TextView
+            android:id="@+id/locationText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@color/textGray"
+            android:textSize="14sp"
+            android:fontFamily="@font/mont_semibold"
+            tools:text="Location" />
+
+        <!--TextView for displaying Email -->
+        <TextView
+            android:id="@+id/divisionText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@color/textGray"
+            android:textSize="12sp"
+            android:fontFamily="@font/mont_semibold"
+            tools:text="Division" />
+
+
+    </LinearLayout>
+
+</LinearLayout>
