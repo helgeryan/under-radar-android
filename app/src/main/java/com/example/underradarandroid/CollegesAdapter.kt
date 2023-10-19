@@ -31,8 +31,6 @@ class CollegesAdapter(private val collegeList: Array<College>) : RecyclerView.Ad
         holder.name.text = college.getCollegeName()
         holder.email.text = college.getLocation()
         holder.division.text = college.id
-        holder.coachImageView.setImageResource(R.drawable.ic_club)
-        holder.commitImageView.setImageResource(R.drawable.ic_college)
     }
 
     // This class defines the ViewHolder object for each item in the RecyclerView
@@ -40,7 +38,5 @@ class CollegesAdapter(private val collegeList: Array<College>) : RecyclerView.Ad
         val name: TextView = itemView.findViewById(R.id.nameText)
         val email: TextView = itemView.findViewById(R.id.locationText)
         val division: TextView = itemView.findViewById(R.id.divisionText)
-        val commitImageView: ImageView = itemView.findViewById(R.id.commitImage)
-        val coachImageView: ImageView = itemView.findViewById(R.id.coachesImage)
     }
 }

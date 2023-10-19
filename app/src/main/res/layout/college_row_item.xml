@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/llMain"
     android:layout_width="match_parent"
@@ -20,6 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="1dp"
+            android:gravity="center_vertical"
             android:orientation="horizontal">
 
             <!--TextView for displaying Name -->
@@ -34,20 +36,17 @@
 
             <ImageView
                 android:id="@+id/commitImage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="7dp"
-
-                />
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:src="@drawable/ic_club"
+                app:tint="@color/yellow" />
 
             <ImageView
                 android:id="@+id/coachesImage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="7dp"
-
-
-                />
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:src="@drawable/ic_college"
+                app:tint="@color/utrBlue" />
 
         </LinearLayout>
 
