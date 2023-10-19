@@ -4,7 +4,6 @@ import com.example.underradarandroid.DataClasses.Club
 import android.util.Log
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.google.gson.Gson
 
 fun DatabaseManager.getClubs() {
     Firebase.firestore.collection(clubsCollection).get()

@@ -21,14 +21,24 @@ class HomeStoriesListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         DatabaseManager.readStories.observe(viewLifecycleOwner, Observer { storiesList ->
-            val itemAdapter = StoriesAdapter(storiesList)
-            // Set the LayoutManager that
-            // this RecyclerView will use.
-            val recyclerView: RecyclerView = view.findViewById(R.id.recycleView)
-            recyclerView.layoutManager = LinearLayoutManager(context)
-            // adapter instance is set to the
-            // recyclerview to inflate the items.
-            recyclerView.adapter = itemAdapter
+            val animationView: com.airbnb.lottie.LottieAnimationView = view.findViewById(com.example.underradarandroid.R.id.animation_view)
+            val recyclerView: androidx.recyclerview.widget.RecyclerView = view.findViewById(com.example.underradarandroid.R.id.recycleView)
+
+            if (storiesList.isNotEmpty()) {
+                recyclerView.visibility = View.VISIBLE
+                animationView.visibility = View.INVISIBLE
+                val itemAdapter = StoriesAdapter(storiesList)
+                // Set the LayoutManager that
+                // this RecyclerView will use.
+                val recyclerView: RecyclerView = view.findViewById(R.id.recycleView)
+                recyclerView.layoutManager = LinearLayoutManager(context)
+                // adapter instance is set to the
+                // recyclerview to inflate the items.
+                recyclerView.adapter = itemAdapter
+            } else {
+                recyclerView.visibility = View.INVISIBLE
+                animationView.visibility = View.VISIBLE
+            }
         })
     }
 

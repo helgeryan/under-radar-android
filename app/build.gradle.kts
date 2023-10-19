@@ -56,8 +56,8 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
-    // GSON for JSON Mapping
-    implementation("com.google.code.gson:gson:2.8.5")
+    // Lottie Images
+    implementation("com.airbnb.android:lottie:6.1.0")
 
     // Import the Firebase BoM
     implementation(platform("com.google.firebase:firebase-bom:32.3.1"))
