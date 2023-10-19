@@ -40,6 +40,7 @@ class HomeFragment : Fragment() {
         val tabLayout: TabLayout = binding.tabLayout
 
         val viewPager2: ViewPager2 = binding.carousel2
+
         val adapter2 = HomePageAdapter(this)
         viewPager2.adapter = adapter2
         TabLayoutMediator(tabLayout, viewPager2) { tab, position ->
