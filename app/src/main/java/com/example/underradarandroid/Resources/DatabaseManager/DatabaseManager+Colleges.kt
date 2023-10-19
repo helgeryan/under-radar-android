@@ -10,9 +10,9 @@ fun DatabaseManager.getColleges() {
     Firebase.firestore.collection(collegesCollection).get()
         .addOnSuccessListener { result ->
             try {
-                colleges = result.toObjects(College::class.java).toTypedArray()
+                collegesObservable.value = result.toObjects(College::class.java).toTypedArray()
 
-                Log.d("UR Logging Colleges", colleges.size.toString())
+                Log.d("UR Logging Colleges", collegesObservable.value?.size.toString())
             } catch (e: RuntimeException) {
                 Log.d("Error", e.message.toString())
             }

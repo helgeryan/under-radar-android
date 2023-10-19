@@ -5,11 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.ItemDecoration
-import com.example.underradarandroid.CollegesAdapter
 import com.example.underradarandroid.R
 import com.example.underradarandroid.Resources.DatabaseManager.DatabaseManager
 import com.example.underradarandroid.databinding.FragmentCollegeListBinding
@@ -26,21 +25,20 @@ class CollegeListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        // getting the employeelist
-        val collegeList = DatabaseManager.colleges
-        // Assign employeelist to ItemAdapter
-        val itemAdapter = CollegesAdapter(collegeList)
-        // Set the LayoutManager that
-        // this RecyclerView will use.
-        val recyclerView: RecyclerView = view.findViewById(R.id.recycleView)
-        val layoutManager = LinearLayoutManager(context)
-        recyclerView.layoutManager = layoutManager
-        // adapter instance is set to the
-        // recyclerview to inflate the items.
-        recyclerView.adapter = itemAdapter
+        DatabaseManager.readCollege.observe(viewLifecycleOwner, Observer { collegeList ->
+            val itemAdapter = CollegesAdapter(collegeList)
+            // Set the LayoutManager that
+            // this RecyclerView will use.
+            val recyclerView: RecyclerView = view.findViewById(R.id.recycleView)
+            val layoutManager = LinearLayoutManager(context)
+            recyclerView.layoutManager = layoutManager
+            // adapter instance is set to the
+            // recyclerview to inflate the items.
+            recyclerView.adapter = itemAdapter
 
-        val dividerItemDecoration = DividerItemDecoration(recyclerView.context, layoutManager.orientation)
-        recyclerView.addItemDecoration(dividerItemDecoration)
+            val dividerItemDecoration = DividerItemDecoration(recyclerView.context, layoutManager.orientation)
+            recyclerView.addItemDecoration(dividerItemDecoration)
+        })
     }
 
     override fun onCreateView(

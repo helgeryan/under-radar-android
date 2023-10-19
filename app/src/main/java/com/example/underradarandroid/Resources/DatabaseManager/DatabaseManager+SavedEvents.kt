@@ -10,8 +10,8 @@ fun DatabaseManager.getSavedEvents(userId: String) {
     Firebase.firestore.collection(savedEventsCollection).whereEqualTo("userId", userId).get()
         .addOnSuccessListener { result ->
             try {
-                savedEvents = result.toObjects(SavedEvent::class.java).toTypedArray()
-                Log.d("UR Logging Saved Events", savedEvents.size.toString())
+                savedEventsObservable.value = result.toObjects(SavedEvent::class.java).toTypedArray()
+                Log.d("UR Logging Saved Events", savedEventsObservable.value?.size.toString())
             } catch (e: RuntimeException) {
                 Log.d("Error", e.message.toString())
             }

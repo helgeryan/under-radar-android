@@ -10,9 +10,9 @@ fun DatabaseManager.getClubs() {
     Firebase.firestore.collection(clubsCollection).get()
         .addOnSuccessListener { result ->
             try {
-                clubs = result.toObjects(Club::class.java).toTypedArray()
+                clubsObservable.value = result.toObjects(Club::class.java).toTypedArray()
 
-                Log.d("UR Logging Clubs", clubs.size.toString())
+                Log.d("UR Logging Clubs", clubsObservable.value?.size.toString())
             } catch (e: RuntimeException) {
                 Log.d("Error", e.message.toString())
             }

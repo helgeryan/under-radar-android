@@ -1,12 +1,12 @@
-package com.example.underradarandroid
+package com.example.underradarandroid.ui.colleges
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.underradarandroid.DataClasses.College
+import com.example.underradarandroid.R
 import com.example.underradarandroid.Resources.DatabaseManager.DatabaseManager
 import com.example.underradarandroid.Resources.DatabaseManager.getConferenceForId
 

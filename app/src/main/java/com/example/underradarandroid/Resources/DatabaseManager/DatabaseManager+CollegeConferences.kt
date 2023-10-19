@@ -10,9 +10,9 @@ fun DatabaseManager.getConferences() {
     Firebase.firestore.collection(conferenceCollection).get()
         .addOnSuccessListener { result ->
             try {
-                collegeConferences = result.toObjects(CollegeConference::class.java).toTypedArray()
+                conferencesObservable.value = result.toObjects(CollegeConference::class.java).toTypedArray()
 
-                Log.d("UR Logging Conferences", collegeConferences.size.toString())
+                Log.d("UR Logging Conferences", conferencesObservable.value?.size.toString())
             } catch (e: RuntimeException) {
                 Log.d("Error", e.message.toString())
             }
@@ -25,5 +25,5 @@ fun DatabaseManager.getConferences() {
 }
 
 fun DatabaseManager.getConferenceForId(id: String): CollegeConference? {
-    return collegeConferences.firstOrNull() { id == it.id }
+    return conferencesObservable.value?.firstOrNull() { id == it.id }
 }

@@ -9,9 +9,9 @@ fun DatabaseManager.getEvents() {
     Firebase.firestore.collection(eventsCollection).get()
         .addOnSuccessListener { result ->
             try {
-                events = result.toObjects(Event::class.java).toTypedArray()
+                eventsObservable.value = result.toObjects(Event::class.java).toTypedArray()
 
-                Log.d("UR Logging Events", events.size.toString())
+                Log.d("UR Logging Events", eventsObservable.value?.size.toString())
             } catch (e: RuntimeException) {
                 Log.d("Error", e.message.toString())
             }

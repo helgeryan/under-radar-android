@@ -10,8 +10,9 @@ fun DatabaseManager.getNotifications(userId: String) {
     Firebase.firestore.collection(notificationsCollection).whereEqualTo("userId", userId).get()
         .addOnSuccessListener { result ->
             try {
-                notifications = result.toObjects(UserNotification::class.java).toTypedArray()
-                Log.d("UR Logging Notifications", notifications.size.toString())
+                notificationsObservable.value = result.toObjects(UserNotification::class.java).toTypedArray()
+
+                Log.d("UR Logging Notifications", notificationsObservable.value?.size.toString())
             } catch (e: RuntimeException) {
                 Log.d("Error", e.message.toString())
             }

@@ -9,9 +9,9 @@ fun DatabaseManager.getStories() {
     Firebase.firestore.collection(storiesCollection).get()
         .addOnSuccessListener { result ->
             try {
-                stories = result.toObjects(Story::class.java).toTypedArray()
+                storiesObservable.value = result.toObjects(Story::class.java).toTypedArray()
 
-                Log.d("UR Logging Stories", stories.size.toString())
+                Log.d("UR Logging Stories", storiesObservable.value?.size.toString())
             } catch (e: RuntimeException) {
                 Log.d("Error", e.message.toString())
             }
