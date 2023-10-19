@@ -12,6 +12,7 @@ import com.example.underradarandroid.Resources.DatabaseManager.getConferenceForI
 
 
 class CollegesAdapter(private val collegeList: Array<College>) : RecyclerView.Adapter<CollegesAdapter.MyViewHolder>() {
+    var onClickListener: OnClickListener? = null
 
     // This method creates a new ViewHolder object for each item in the RecyclerView
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -39,6 +40,16 @@ class CollegesAdapter(private val collegeList: Array<College>) : RecyclerView.Ad
                 holder.division.text = conference.division
             }
         }
+        holder.itemView.setOnClickListener {
+            if (onClickListener != null) {
+                onClickListener!!.onClick(position, college)
+            }
+        }
+    }
+
+    // onClickListener Interface
+    interface OnClickListener {
+        fun onClick(position: Int, model: College)
     }
 
     // This class defines the ViewHolder object for each item in the RecyclerView

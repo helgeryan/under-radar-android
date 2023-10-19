@@ -21,7 +21,11 @@
         android:id="@+id/navigation_collegeList"
         android:name="com.example.underradarandroid.ui.colleges.CollegeListFragment"
         android:label="@string/title_colleges"
-        tools:layout="@layout/fragment_college_list" />
+        tools:layout="@layout/fragment_college_list" >
+        <action
+            android:id="@+id/action_navigation_collegeList_to_collegeFragment"
+            app:destination="@id/collegeFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_clubs"
@@ -33,4 +37,9 @@
         android:name="com.example.underradarandroid.ui.notifications.NotificationsFragment"
         android:label="@string/title_more"
         tools:layout="@layout/fragment_notifications" />
+    <fragment
+        android:id="@+id/collegeFragment"
+        android:name="com.example.underradarandroid.CollegeFragment"
+        android:label="fragment_college"
+        tools:layout="@layout/fragment_college" />
 </navigation>
