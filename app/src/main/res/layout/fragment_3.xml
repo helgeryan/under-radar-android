@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.underradarandroid.ui.home.Fragment3">
+    tools:context="com.example.underradarandroid.ui.home.HomeStoriesListFragment">
 
-    <TextView
+    <!--RecyclerView-->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycleView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:textColor="@color/utrBlue"
-        android:textSize="50dp"
-        android:text="GFG 3" />
+        tools:listitem="@layout/items_list"/>
 
 </FrameLayout>

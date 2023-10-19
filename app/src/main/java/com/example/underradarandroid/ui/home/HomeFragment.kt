@@ -12,6 +12,7 @@ import androidx.viewpager.widget.ViewPager
 import androidx.viewpager2.widget.ViewPager2
 import com.example.underradarandroid.databinding.FragmentHomeBinding
 import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 
 class HomeFragment : Fragment() {
 
@@ -38,6 +39,22 @@ class HomeFragment : Fragment() {
 
         val tabLayout: TabLayout = binding.tabLayout
 
+        val viewPager2: ViewPager2 = binding.carousel2
+        val adapter2 = HomePageAdapter(this)
+        viewPager2.adapter = adapter2
+        TabLayoutMediator(tabLayout, viewPager2) { tab, position ->
+            when (position) {
+                0 -> {
+                    tab.text = "Stories"
+                }
+                1 -> {
+                    tab.text = "Events"
+                }
+                else -> {
+                    tab.text = "Stories"
+                }
+            }
+        }.attach()
         return root
     }
 
