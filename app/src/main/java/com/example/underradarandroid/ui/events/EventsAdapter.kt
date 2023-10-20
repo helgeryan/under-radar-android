@@ -5,12 +5,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.underradarandroid.DataClasses.College
 import com.example.underradarandroid.DataClasses.Event
 import com.example.underradarandroid.R
+import com.example.underradarandroid.ui.colleges.CollegesAdapter
 
 
 class EventsAdapter(private val eventsList: Array<Event>) : RecyclerView.Adapter<EventsAdapter.MyViewHolder>() {
-
+    var onClickListener: EventsAdapter.OnClickListener? = null
     // This method creates a new ViewHolder object for each item in the RecyclerView
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         // Inflate the layout for each item and return a new ViewHolder object
@@ -31,8 +33,18 @@ class EventsAdapter(private val eventsList: Array<Event>) : RecyclerView.Adapter
         val event = eventsList[position]
         holder.name.text = event.title
         holder.email.text = event.description
+
+        holder.itemView.setOnClickListener {
+            if (onClickListener != null) {
+                onClickListener!!.onClick(position, event)
+            }
+        }
     }
 
+    // onClickListener Interface
+    interface OnClickListener {
+        fun onClick(position: Int, model: Event)
+    }
     // This class defines the ViewHolder object for each item in the RecyclerView
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val name: TextView = itemView.findViewById(R.id.tvName)

@@ -9,7 +9,14 @@
         android:id="@+id/navigation_home"
         android:name="com.example.underradarandroid.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_eventFragment"
+            app:destination="@id/eventFragment" />
+        <action
+            android:id="@+id/action_navigation_home_to_storyFragment"
+            app:destination="@id/storyFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_players"
@@ -60,4 +67,14 @@
         android:name="com.example.underradarandroid.PlayerFragment"
         android:label="fragment_player"
         tools:layout="@layout/fragment_player" />
+    <fragment
+        android:id="@+id/eventFragment"
+        android:name="com.example.underradarandroid.EventFragment"
+        android:label="fragment_event"
+        tools:layout="@layout/fragment_event" />
+    <fragment
+        android:id="@+id/storyFragment"
+        android:name="com.example.underradarandroid.StoryFragment"
+        android:label="fragment_story"
+        tools:layout="@layout/fragment_story" />
 </navigation>
