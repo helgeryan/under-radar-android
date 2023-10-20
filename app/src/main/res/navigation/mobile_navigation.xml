@@ -15,7 +15,11 @@
         android:id="@+id/navigation_players"
         android:name="com.example.underradarandroid.ui.players.PlayerListFragment"
         android:label="@string/title_players"
-        tools:layout="@layout/fragment_player_list" />
+        tools:layout="@layout/fragment_player_list" >
+        <action
+            android:id="@+id/action_navigation_players_to_playerFragment"
+            app:destination="@id/playerFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_collegeList"
@@ -31,7 +35,11 @@
         android:id="@+id/navigation_clubs"
         android:name="com.example.underradarandroid.ui.clubs.ClubListFragment"
         android:label="@string/title_clubs"
-        tools:layout="@layout/fragment_club_list" />
+        tools:layout="@layout/fragment_club_list" >
+        <action
+            android:id="@+id/action_navigation_clubs_to_clubFragment"
+            app:destination="@id/clubFragment" />
+    </fragment>
     <fragment
         android:id="@+id/navigation_more"
         android:name="com.example.underradarandroid.ui.notifications.NotificationsFragment"
@@ -42,4 +50,14 @@
         android:name="com.example.underradarandroid.CollegeFragment"
         android:label="fragment_college"
         tools:layout="@layout/fragment_college" />
+    <fragment
+        android:id="@+id/clubFragment"
+        android:name="com.example.underradarandroid.ClubFragment"
+        android:label="fragment_club"
+        tools:layout="@layout/fragment_club" />
+    <fragment
+        android:id="@+id/playerFragment"
+        android:name="com.example.underradarandroid.PlayerFragment"
+        android:label="fragment_player"
+        tools:layout="@layout/fragment_player" />
 </navigation>

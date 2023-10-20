@@ -31,4 +31,21 @@ data class User (
     var yearsOfEligibility: Int? = null,
     var currentCollegeId: String? = null,
     var summerTeam: String? = null
-)
+) {
+    fun getHometownText(): String {
+        return "$hometown, $state"
+    }
+
+    fun isPlayer(): Boolean {
+        return when(profileType) {
+            0,1 -> true
+            else -> false
+        }
+    }
+    fun isCoach(): Boolean {
+        return when(profileType) {
+            0,1 -> false
+            else -> true
+        }
+    }
+}

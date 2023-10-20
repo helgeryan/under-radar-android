@@ -2,16 +2,22 @@ package com.example.underradarandroid.ui.players
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.underradarandroid.DataClasses.Club
+import com.example.underradarandroid.DataClasses.User
 import com.example.underradarandroid.R
 import com.example.underradarandroid.Resources.DatabaseManager.DatabaseManager
 import com.example.underradarandroid.databinding.FragmentPlayerListBinding
+import com.example.underradarandroid.ui.clubs.ClubAdapter
 
 class PlayerListFragment : Fragment() {
     private var _binding: FragmentPlayerListBinding? = null
@@ -26,15 +32,22 @@ class PlayerListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         DatabaseManager.readUsers.observe(viewLifecycleOwner, Observer { userList ->
-            // Assign employeelist to ItemAdapter
-            val itemAdapter = PlayerAdapter(userList)
-            // Set the LayoutManager that
-            // this RecyclerView will use.
+            val playerList = userList.filter { it.isPlayer() }
+            val itemAdapter = PlayerAdapter(playerList.toTypedArray())
+            itemAdapter.onClickListener = object: PlayerAdapter.OnClickListener {
+                override fun onClick(position: Int, model: User) {
+                    findNavController().navigate(R.id.action_navigation_players_to_playerFragment)
+                    Log.d("UR Logging", "${model.firstName}")
+                }
+            }
+
             val recyclerView: RecyclerView = view.findViewById(R.id.recycleView)
-            recyclerView.layoutManager = LinearLayoutManager(context)
-            // adapter instance is set to the
-            // recyclerview to inflate the items.
+            val layoutManager = LinearLayoutManager(context)
+            recyclerView.layoutManager = layoutManager
             recyclerView.adapter = itemAdapter
+
+            val dividerItemDecoration = DividerItemDecoration(recyclerView.context, layoutManager.orientation)
+            recyclerView.addItemDecoration(dividerItemDecoration)
         })
     }
 

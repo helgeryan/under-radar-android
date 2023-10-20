@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieAnimationView
@@ -32,13 +33,15 @@ class HomeEventsListFragment : Fragment() {
                 animationView.visibility = View.INVISIBLE
                 // Assign employeelist to ItemAdapter
                 val itemAdapter = com.example.underradarandroid.ui.events.EventsAdapter(eventList)
-                // Set the LayoutManager that
-                // this RecyclerView will use.
-                recyclerView.layoutManager =
-                    androidx.recyclerview.widget.LinearLayoutManager(context)
+
+                val layoutManager = LinearLayoutManager(context)
+                recyclerView.layoutManager = layoutManager
                 // adapter instance is set to the
                 // recyclerview to inflate the items.
                 recyclerView.adapter = itemAdapter
+
+                val dividerItemDecoration = DividerItemDecoration(recyclerView.context, layoutManager.orientation)
+                recyclerView.addItemDecoration(dividerItemDecoration)
             } else {
                 recyclerView.visibility = View.INVISIBLE
                 animationView.visibility = View.VISIBLE
