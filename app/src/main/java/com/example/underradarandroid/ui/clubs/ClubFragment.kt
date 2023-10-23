@@ -8,12 +8,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
+import androidx.navigation.fragment.findNavController
 import com.example.underradarandroid.DataClasses.Club
 import com.example.underradarandroid.R
+import com.example.underradarandroid.databinding.FragmentClubBinding
+import com.example.underradarandroid.ui.home.HomePageAdapter
+import com.google.android.material.tabs.TabLayoutMediator
 
 class ClubFragment : Fragment() {
+
+    private lateinit var binding: FragmentClubBinding
+
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+//
+//        val club = arguments?.getSerializable("club", Club::class.java)
+//
+//        Log.d("UR Logging", club.toString())
     }
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
@@ -21,9 +33,37 @@ class ClubFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        binding = FragmentClubBinding.inflate(layoutInflater)
+        val root = binding.root
         val club = arguments?.getSerializable("club", Club::class.java)
-        Log.d("UR Logging", club.toString())
+        binding.nameText.text = club?.name
+        binding.locationText.text = club?.getLocation()
+
+        val viewPager = binding.clubPlayerPager
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_club, container, false)
+
+
+
+        club?.let {
+            val adapter = ClubPageAdapter(this, club)
+            viewPager.adapter = adapter
+            TabLayoutMediator(binding.tabLayout, viewPager) { tab, position ->
+                when (position) {
+                    0 -> {
+                        tab.text = "Players"
+                    }
+                    1 -> {
+                        tab.text = "Commits"
+                    }
+                    2 -> {
+                        tab.text = "Coaches"
+                    }
+                    else -> {
+                        tab.text = "Players"
+                    }
+                }
+            }.attach()
+        }
+        return root
     }
 }

@@ -22,19 +22,19 @@ object DatabaseManager {
      val readEvents : LiveData<Array<Event>> get() = eventsObservable
 
      var usersObservable = MutableLiveData<Array<User>>()
-     val readUsers : LiveData<Array<User>> get() = usersObservable
+     val readUsers: LiveData<Array<User>> get() = usersObservable
      var clubsObservable = MutableLiveData<Array<Club>>()
-     val readClubs : LiveData<Array<Club>> get() = clubsObservable
+     val readClubs: LiveData<Array<Club>> get() = clubsObservable
      var collegesObservable = MutableLiveData<Array<College>>()
-     val readCollege : LiveData<Array<College>> get() = collegesObservable
+     val readCollege: LiveData<Array<College>> get() = collegesObservable
      var notificationsObservable = MutableLiveData<Array<UserNotification>>()
-     val readNotifications : LiveData<Array<UserNotification>> get() = notificationsObservable
+     val readNotifications: LiveData<Array<UserNotification>> get() = notificationsObservable
      var savedEventsObservable = MutableLiveData<Array<SavedEvent>>()
-     val readSavedEvents : LiveData<Array<SavedEvent>> get() = savedEventsObservable
+     val readSavedEvents: LiveData<Array<SavedEvent>> get() = savedEventsObservable
      var storiesObservable = MutableLiveData<Array<Story>>()
-     val readStories : LiveData<Array<Story>> get() = storiesObservable
+     val readStories: LiveData<Array<Story>> get() = storiesObservable
      var conferencesObservable = MutableLiveData<Array<CollegeConference>>()
-     val readConferences : LiveData<Array<CollegeConference>> get() = conferencesObservable
+     val readConferences: LiveData<Array<CollegeConference>> get() = conferencesObservable
 
      init {
 

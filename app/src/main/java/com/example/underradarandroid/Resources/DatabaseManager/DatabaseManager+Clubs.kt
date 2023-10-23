@@ -2,8 +2,10 @@ package com.example.underradarandroid.Resources.DatabaseManager
 
 import com.example.underradarandroid.DataClasses.Club
 import android.util.Log
+import com.example.underradarandroid.DataClasses.User
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import java.io.Serializable
 
 fun DatabaseManager.getClubs() {
     Firebase.firestore.collection(clubsCollection).get()
@@ -21,4 +23,22 @@ fun DatabaseManager.getClubs() {
         .addOnFailureListener { error ->
             print("Error")
         }
+}
+
+fun DatabaseManager.getPlayersForClub(id: String): Array<User>? {
+    return usersObservable.value?.filter() { user ->
+        user.club == id && user.isPlayer()
+    }?.toTypedArray()
+}
+
+fun DatabaseManager.getCoachesForClub(id: String): Array<User>? {
+    return usersObservable.value?.filter() { user ->
+        user.club == id && user.isCoach()
+    }?.toTypedArray()
+}
+
+fun DatabaseManager.getCommitmentsForClub(id: String): Array<User>? {
+    return usersObservable.value?.filter() { user ->
+        user.club == id && user.collegeCommit != null
+    }?.toTypedArray()
 }

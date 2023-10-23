@@ -19,7 +19,7 @@ import com.example.underradarandroid.Resources.DatabaseManager.DatabaseManager
 import com.example.underradarandroid.databinding.FragmentPlayerListBinding
 import com.example.underradarandroid.ui.clubs.ClubAdapter
 
-class PlayerListFragment : Fragment() {
+class PlayerListFragment(private var users: Array<User>? = null) : Fragment() {
     private var _binding: FragmentPlayerListBinding? = null
 
     // This property is only valid between onCreateView and
@@ -31,9 +31,9 @@ class PlayerListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        DatabaseManager.readUsers.observe(viewLifecycleOwner, Observer { userList ->
-            val playerList = userList.filter { it.isPlayer() }
-            val itemAdapter = PlayerAdapter(playerList.toTypedArray())
+        if (users != null) {
+
+            val itemAdapter = PlayerAdapter(users!!)
             itemAdapter.onClickListener = object: PlayerAdapter.OnClickListener {
                 override fun onClick(position: Int, model: User) {
                     findNavController().navigate(R.id.action_navigation_players_to_playerFragment)
@@ -48,7 +48,26 @@ class PlayerListFragment : Fragment() {
 
             val dividerItemDecoration = DividerItemDecoration(recyclerView.context, layoutManager.orientation)
             recyclerView.addItemDecoration(dividerItemDecoration)
-        })
+        } else {
+            DatabaseManager.readUsers.observe(viewLifecycleOwner, Observer { userList ->
+                val playerList = userList.filter { it.isPlayer() }
+                val itemAdapter = PlayerAdapter(playerList.toTypedArray())
+                itemAdapter.onClickListener = object: PlayerAdapter.OnClickListener {
+                    override fun onClick(position: Int, model: User) {
+                        findNavController().navigate(R.id.action_navigation_players_to_playerFragment)
+                        Log.d("UR Logging", "${model.firstName}")
+                    }
+                }
+
+                val recyclerView: RecyclerView = view.findViewById(R.id.recycleView)
+                val layoutManager = LinearLayoutManager(context)
+                recyclerView.layoutManager = layoutManager
+                recyclerView.adapter = itemAdapter
+
+                val dividerItemDecoration = DividerItemDecoration(recyclerView.context, layoutManager.orientation)
+                recyclerView.addItemDecoration(dividerItemDecoration)
+            })
+        }
     }
 
     override fun onCreateView(
