@@ -37,7 +37,9 @@ class ClubListFragment : Fragment() {
             val itemAdapter = ClubAdapter(clubList)
             itemAdapter.onClickListener = object: ClubAdapter.OnClickListener {
                 override fun onClick(position: Int, model: Club) {
-                    findNavController().navigate(R.id.action_navigation_clubs_to_clubFragment)
+                    val bundle = Bundle()
+                    bundle.putSerializable("club", model)
+                    findNavController().navigate(R.id.action_navigation_clubs_to_clubFragment, bundle)
                     Log.d("UR Logging", "${model.name}")
                 }
             }

@@ -1,5 +1,7 @@
 package com.example.underradarandroid.DataClasses
 
+import java.io.Serializable
+
 data class Club (
     val id: String = "",
     val name: String = "",
@@ -12,7 +14,7 @@ data class Club (
     var description: String? = null,
     var website: String? = null,
     var isVerified: Boolean? = false
-) {
+): Serializable {
     fun getLocation(): String {
         return this.city + ", " + this.state
     }
