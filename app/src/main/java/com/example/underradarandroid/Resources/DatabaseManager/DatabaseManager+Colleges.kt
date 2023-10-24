@@ -42,3 +42,11 @@ fun DatabaseManager.getCommitmentsForCollege(id: String): Array<User>? {
         user.isPlayer() && user.collegeCommit == id
     }?.toTypedArray()
 }
+
+fun DatabaseManager.hasCommits(id: String): Boolean {
+    return usersObservable.value?.firstOrNull() { user -> user.collegeCommit == id && user.isPlayer() } != null
+}
+
+fun DatabaseManager.hasCoaches(id: String): Boolean {
+    return usersObservable.value?.firstOrNull() { user -> user.college == id && user.isCoach() } != null
+}

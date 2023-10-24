@@ -3,12 +3,15 @@ package com.example.underradarandroid.ui.colleges
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.underradarandroid.DataClasses.College
 import com.example.underradarandroid.R
 import com.example.underradarandroid.Resources.DatabaseManager.DatabaseManager
 import com.example.underradarandroid.Resources.DatabaseManager.getConferenceForId
+import com.example.underradarandroid.Resources.DatabaseManager.hasCoaches
+import com.example.underradarandroid.Resources.DatabaseManager.hasCommits
 
 
 class CollegesAdapter(private val collegeList: Array<College>) : RecyclerView.Adapter<CollegesAdapter.MyViewHolder>() {
@@ -45,6 +48,18 @@ class CollegesAdapter(private val collegeList: Array<College>) : RecyclerView.Ad
                 onClickListener!!.onClick(position, college)
             }
         }
+
+        if (DatabaseManager.hasCoaches(college.id)) {
+            holder.coachImageView.visibility = View.VISIBLE
+        } else {
+            holder.coachImageView.visibility = View.INVISIBLE
+        }
+
+        if (DatabaseManager.hasCommits(college.id)) {
+            holder.commitImageView.visibility = View.VISIBLE
+        } else {
+            holder.commitImageView.visibility = View.INVISIBLE
+        }
     }
 
     // onClickListener Interface
@@ -57,5 +72,7 @@ class CollegesAdapter(private val collegeList: Array<College>) : RecyclerView.Ad
         val name: TextView = itemView.findViewById(R.id.nameText)
         val email: TextView = itemView.findViewById(R.id.locationText)
         val division: TextView = itemView.findViewById(R.id.divisionText)
+        val coachImageView: ImageView = itemView.findViewById(R.id.coachesImage)
+        val commitImageView: ImageView = itemView.findViewById(R.id.commitImage)
     }
 }
