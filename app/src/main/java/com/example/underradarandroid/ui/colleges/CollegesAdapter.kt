@@ -52,13 +52,13 @@ class CollegesAdapter(private val collegeList: Array<College>) : RecyclerView.Ad
         if (DatabaseManager.hasCoaches(college.id)) {
             holder.coachImageView.visibility = View.VISIBLE
         } else {
-            holder.coachImageView.visibility = View.INVISIBLE
+            holder.coachImageView.visibility = View.GONE
         }
 
         if (DatabaseManager.hasCommits(college.id)) {
             holder.commitImageView.visibility = View.VISIBLE
         } else {
-            holder.commitImageView.visibility = View.INVISIBLE
+            holder.commitImageView.visibility = View.GONE
         }
     }
 

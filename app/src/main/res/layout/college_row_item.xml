@@ -12,33 +12,39 @@
 
     <!--LinearLayout orientation Vertical -->
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="8dp"
         android:orientation="vertical">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="1dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:padding="1dp">
 
             <!--TextView for displaying Name -->
             <TextView
                 android:id="@+id/nameText"
-                android:layout_width="wrap_content"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/mont_semibold"
                 android:textColor="@android:color/black"
                 android:textSize="16sp"
-                android:fontFamily="@font/mont_semibold"
-                tools:text="Name" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="This  really long to test this out because it is really dumb" />
 
             <ImageView
                 android:id="@+id/commitImage"
                 android:layout_width="15dp"
                 android:layout_height="15dp"
                 android:src="@drawable/ic_club"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/nameText"
+                app:layout_constraintTop_toTopOf="parent"
                 app:tint="@color/yellow" />
 
             <ImageView
@@ -46,9 +52,21 @@
                 android:layout_width="15dp"
                 android:layout_height="15dp"
                 android:src="@drawable/ic_college"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/commitImage"
+                app:layout_constraintTop_toTopOf="parent"
                 app:tint="@color/utrBlue" />
 
-        </LinearLayout>
+            <View
+                android:id="@id/rightSpacer"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/coachesImage"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <!--TextView for displaying Email -->
         <TextView
