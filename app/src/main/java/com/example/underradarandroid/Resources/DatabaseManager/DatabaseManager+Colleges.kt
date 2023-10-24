@@ -26,14 +26,15 @@ fun DatabaseManager.getColleges() {
 
 fun DatabaseManager.getPlayersForCollege(id: String): Array<User>? {
     return usersObservable.value?.filter() { user ->
-        user.currentCollegeId == id && user.isPlayer()
+        user.isPlayer() && user.currentCollegeId == id
     }?.toTypedArray()
 }
 
 fun DatabaseManager.getCoachesForCollege(id: String): Array<User>? {
-    return usersObservable.value?.filter() { user ->
-        user.college == id && user.isCoach()
+    val list = usersObservable.value?.filter() { user ->
+        user.isCoach() && user.college == id
     }?.toTypedArray()
+    return list
 }
 
 fun DatabaseManager.getCommitmentsForCollege(id: String): Array<User>? {

@@ -54,10 +54,10 @@ class CollegeFragment : Fragment() {
                         tab.text = "Players"
                     }
                     1 -> {
-                        tab.text = "Commits"
+                        tab.text = "Coaches"
                     }
                     2 -> {
-                        tab.text = "Coaches"
+                        tab.text = "Commits"
                     }
                     else -> {
                         tab.text = "Players"

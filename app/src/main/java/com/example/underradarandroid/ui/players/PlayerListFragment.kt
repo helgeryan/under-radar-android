@@ -32,7 +32,9 @@ class PlayerListFragment(private var users: Array<User>? = null) : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         if (users != null) {
+            Log.d("UR Comparison", users.toString())
             val itemAdapter = PlayerAdapter(users!!)
+
             itemAdapter.onClickListener = object: PlayerAdapter.OnClickListener {
                 override fun onClick(position: Int, model: User) {
                     findNavController().navigate(R.id.action_navigation_players_to_playerFragment)

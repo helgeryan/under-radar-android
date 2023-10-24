@@ -29,7 +29,8 @@ class CollegeListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         DatabaseManager.readCollege.observe(viewLifecycleOwner, Observer { collegeList ->
-            val itemAdapter = CollegesAdapter(collegeList)
+            val sorted = collegeList.sortedByDescending { college -> college.name }.reversed()
+            val itemAdapter = CollegesAdapter(sorted.toTypedArray())
             itemAdapter.onClickListener = object: CollegesAdapter.OnClickListener {
                 override fun onClick(position: Int, model: College) {
                     val bundle = Bundle()
