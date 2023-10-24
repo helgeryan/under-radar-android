@@ -25,9 +25,9 @@ data class User (
     var collegeCommit: String? = null,
     var gpa: Double? = null,
     var club: String? = null,
-//    var videos: [Video]?,
+    var videos: List<Video>? = null,
 //    var links: [UserLink]?,
-//    var scoutInfo: ScoutInfo?,
+    var scoutInfo: ScoutInfo? = null,
     var yearsOfEligibility: Int? = null,
     var currentCollegeId: String? = null,
     var summerTeam: String? = null
@@ -49,3 +49,25 @@ data class User (
         }
     }
 }
+
+
+data class Video (
+    val id: String = "",
+    val caption: String = "",
+    val thumbnail: String = "",
+    val date: String = "",
+    val videoUrl: String = "",
+)
+
+data class ScoutInfo (
+    val verifiedBy: String = "",
+    val fastball: String = "",
+    val curveball: String = "",
+    val sixty: String = "",
+    val ofVelo: String = "",
+    val ifVelo: String = "",
+    val slider: String = "",
+    val popTime: String = "",
+    val exitVelo: String = "",
+    val workoutDescription: String = "",
+)

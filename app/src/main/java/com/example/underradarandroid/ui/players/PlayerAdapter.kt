@@ -42,16 +42,16 @@ class PlayerAdapter(private val playerList: Array<User>) : RecyclerView.Adapter<
         } else {
             holder.commitImageView.visibility = View.VISIBLE
         }
-//        if (player.videos == null) {
-//            holder.commitImageView.visibility = View.INVISIBLE
-//        } else {
-//            holder.commitImageView.visibility = View.VISIBLE
-//        }
-//        if (player.scoutInfo == null) {
-//            holder.commitImageView.visibility = View.INVISIBLE
-//        } else {
-//            holder.commitImageView.visibility = View.VISIBLE
-//        }
+        if (player.videos == null) {
+            holder.videoImageView.visibility = View.INVISIBLE
+        } else {
+            holder.videoImageView.visibility = View.VISIBLE
+        }
+        if (player.scoutInfo == null) {
+            holder.verifiedImageView.visibility = View.INVISIBLE
+        } else {
+            holder.verifiedImageView.visibility = View.VISIBLE
+        }
         if (player.hometown == null) {
             holder.hometown.visibility = View.GONE
         } else {
