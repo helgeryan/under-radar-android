@@ -23,3 +23,21 @@ fun DatabaseManager.getColleges() {
             print("Error")
         }
 }
+
+fun DatabaseManager.getPlayersForCollege(id: String): Array<User>? {
+    return usersObservable.value?.filter() { user ->
+        user.currentCollegeId == id && user.isPlayer()
+    }?.toTypedArray()
+}
+
+fun DatabaseManager.getCoachesForCollege(id: String): Array<User>? {
+    return usersObservable.value?.filter() { user ->
+        user.college == id && user.isCoach()
+    }?.toTypedArray()
+}
+
+fun DatabaseManager.getCommitmentsForCollege(id: String): Array<User>? {
+    return usersObservable.value?.filter() { user ->
+        user.isPlayer() && user.collegeCommit == id
+    }?.toTypedArray()
+}

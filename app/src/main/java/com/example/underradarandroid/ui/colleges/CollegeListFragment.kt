@@ -32,7 +32,9 @@ class CollegeListFragment : Fragment() {
             val itemAdapter = CollegesAdapter(collegeList)
             itemAdapter.onClickListener = object: CollegesAdapter.OnClickListener {
                 override fun onClick(position: Int, model: College) {
-                    findNavController().navigate(R.id.action_navigation_collegeList_to_collegeFragment)
+                    val bundle = Bundle()
+                    bundle.putSerializable("college", model)
+                    findNavController().navigate(R.id.action_navigation_collegeList_to_collegeFragment, bundle)
                     Log.d("UR Logging", "${model.name}")
                 }
             }

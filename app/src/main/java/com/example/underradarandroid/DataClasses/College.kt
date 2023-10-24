@@ -1,5 +1,7 @@
 package com.example.underradarandroid.DataClasses
 
+import java.io.Serializable
+
 data class College(
     val id: String = "",
     val name: String = "",
@@ -13,7 +15,7 @@ data class College(
     var description: String? = null,
     var logo: String? = null,
     var website: String? = null
-) {
+): Serializable {
     fun getCollegeName(): String {
         return this.name + " " + this.mascot
     }

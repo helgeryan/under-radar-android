@@ -20,13 +20,8 @@ class ClubFragment : Fragment() {
 
     private lateinit var binding: FragmentClubBinding
 
-    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//
-//        val club = arguments?.getSerializable("club", Club::class.java)
-//
-//        Log.d("UR Logging", club.toString())
     }
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
