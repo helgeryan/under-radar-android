@@ -14,6 +14,7 @@ import com.example.underradarandroid.R
 import com.example.underradarandroid.databinding.FragmentClubBinding
 import com.example.underradarandroid.ui.home.HomePageAdapter
 import com.google.android.material.tabs.TabLayoutMediator
+import com.squareup.picasso.Picasso
 
 class ClubFragment : Fragment() {
 
@@ -39,6 +40,14 @@ class ClubFragment : Fragment() {
         binding.nameText.text = club?.name
         binding.locationText.text = club?.getLocation()
 
+        val logo = club?.logo
+        logo?.let {
+            Picasso
+                .get()
+                .load(logo)
+                .placeholder(R.drawable.ic_club)
+                .into(binding.logoImageView)
+        }
         val viewPager = binding.clubPlayerPager
         // Inflate the layout for this fragment
 

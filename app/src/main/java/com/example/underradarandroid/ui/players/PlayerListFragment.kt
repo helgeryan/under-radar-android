@@ -32,7 +32,6 @@ class PlayerListFragment(private var users: Array<User>? = null) : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         if (users != null) {
-
             val itemAdapter = PlayerAdapter(users!!)
             itemAdapter.onClickListener = object: PlayerAdapter.OnClickListener {
                 override fun onClick(position: Int, model: User) {

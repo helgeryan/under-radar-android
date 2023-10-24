@@ -56,6 +56,9 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
+    // Picasso
+    implementation("com.squareup.picasso:picasso:2.8")
+
     // Lottie Images
     implementation("com.airbnb.android:lottie:6.1.0")
 
