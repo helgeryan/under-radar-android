@@ -38,17 +38,17 @@ class PlayerAdapter(private val playerList: Array<User>) : RecyclerView.Adapter<
         holder.gradYear.text = "${player.year}"
 
         if (player.collegeCommit == null) {
-            holder.commitImageView.visibility = View.INVISIBLE
+            holder.commitImageView.visibility = View.GONE
         } else {
             holder.commitImageView.visibility = View.VISIBLE
         }
         if (player.videos == null) {
-            holder.videoImageView.visibility = View.INVISIBLE
+            holder.videoImageView.visibility = View.GONE
         } else {
             holder.videoImageView.visibility = View.VISIBLE
         }
         if (player.scoutInfo == null) {
-            holder.verifiedImageView.visibility = View.INVISIBLE
+            holder.verifiedImageView.visibility = View.GONE
         } else {
             holder.verifiedImageView.visibility = View.VISIBLE
         }

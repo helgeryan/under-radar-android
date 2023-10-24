@@ -17,7 +17,7 @@
         android:padding="8dp"
         android:orientation="vertical">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="1dp"
@@ -32,30 +32,54 @@
                 android:textColor="@android:color/black"
                 android:textSize="16sp"
                 android:fontFamily="@font/mont_semibold"
-                tools:text="Name" />
+                tools:text="Name"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
 
             <ImageView
                 android:id="@+id/commitImage"
                 android:layout_width="15dp"
                 android:layout_height="15dp"
                 android:src="@drawable/ic_club"
-                app:tint="@color/yellow" />
+                app:tint="@color/yellow"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/nameText"/>
 
             <ImageView
                 android:id="@+id/verifiedImage"
                 android:layout_width="15dp"
                 android:layout_height="15dp"
                 android:src="@drawable/ic_verified"
-                app:tint="@color/utrBlue" />
+                app:tint="@color/utrBlue"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@id/commitImage"
+                />
 
             <ImageView
                 android:id="@+id/videosImages"
                 android:layout_width="15dp"
                 android:layout_height="15dp"
                 android:src="@drawable/ic_video"
-                app:tint="#FF5555" />
+                app:tint="#FF5555"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@id/verifiedImage"/>
 
-        </LinearLayout>
+            <View
+                android:id="@+id/rightSpacer"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@id/videosImages"
+                app:layout_constraintEnd_toEndOf="parent"
+                />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <!--TextView for displaying Email -->
         <TextView
