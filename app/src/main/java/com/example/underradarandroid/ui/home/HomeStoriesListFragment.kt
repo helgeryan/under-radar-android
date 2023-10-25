@@ -12,10 +12,8 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.underradarandroid.DataClasses.Story
-import com.example.underradarandroid.DataClasses.User
 import com.example.underradarandroid.R
 import com.example.underradarandroid.Resources.DatabaseManager.DatabaseManager
-import com.example.underradarandroid.ui.players.PlayerAdapter
 import com.example.underradarandroid.ui.stories.StoriesAdapter
 
 class HomeStoriesListFragment : Fragment() {
@@ -36,6 +34,8 @@ class HomeStoriesListFragment : Fragment() {
                 val itemAdapter = StoriesAdapter(storiesList)
                 itemAdapter.onClickListener = object: StoriesAdapter.OnClickListener {
                     override fun onClick(position: Int, model: Story) {
+                        val bundle = Bundle()
+                        bundle.putSerializable("story", model)
                         findNavController().navigate(R.id.action_navigation_home_to_storyFragment)
                         Log.d("UR Logging", "${model.title}")
                     }
@@ -63,6 +63,6 @@ class HomeStoriesListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_3, container, false)
+        return inflater.inflate(R.layout.fragment_story_list, container, false)
     }
 }

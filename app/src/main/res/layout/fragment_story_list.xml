@@ -12,7 +12,7 @@
         android:id="@+id/recycleView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/items_list"/>
+        tools:listitem="@layout/story_row_item"/>
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/animation_view"

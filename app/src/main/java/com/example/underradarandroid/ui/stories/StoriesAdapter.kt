@@ -16,7 +16,7 @@ class StoriesAdapter(private val storiesList: Array<Story>) : RecyclerView.Adapt
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         // Inflate the layout for each item and return a new ViewHolder object
         val itemView =
-            LayoutInflater.from(parent.context).inflate(R.layout.items_list, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.story_row_item, parent, false)
         return MyViewHolder(itemView)
     }
 
@@ -31,7 +31,9 @@ class StoriesAdapter(private val storiesList: Array<Story>) : RecyclerView.Adapt
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val story = storiesList[position]
         holder.name.text = story.title
-        holder.email.text = story.description
+        holder.description.text = story.description
+        holder.date.text = story.date
+        holder.state.text = story.state
 
         holder.itemView.setOnClickListener {
             if (onClickListener != null) {
@@ -47,6 +49,8 @@ class StoriesAdapter(private val storiesList: Array<Story>) : RecyclerView.Adapt
     // This class defines the ViewHolder object for each item in the RecyclerView
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val name: TextView = itemView.findViewById(R.id.tvName)
-        val email: TextView = itemView.findViewById(R.id.tvLocation)
+        val description: TextView = itemView.findViewById(R.id.descriptionTextView)
+        val date: TextView = itemView.findViewById(R.id.dateTextView)
+        val state: TextView = itemView.findViewById(R.id.stateText)
     }
 }

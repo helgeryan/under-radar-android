@@ -1,5 +1,7 @@
 package com.example.underradarandroid.DataClasses
 
+import java.io.Serializable
+
 data class Story (
     val id: String = "",
     val title: String = "",
@@ -12,4 +14,4 @@ data class Story (
     val authorIdval: String = "",
 //    var sections: [StorySection]? = nil,
 //var tags: [StoryTag]? = nil,
-)
+): Serializable
