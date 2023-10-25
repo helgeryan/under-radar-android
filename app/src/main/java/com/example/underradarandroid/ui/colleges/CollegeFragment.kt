@@ -17,16 +17,6 @@ class CollegeFragment : Fragment() {
 
     private lateinit var binding: FragmentCollegeBinding
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
-
-    override fun onStart() {
-        super.onStart()
-        val activity = activity
-        val actionBar = activity?.actionBar
-        actionBar?.title = "Hello"
-    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }

@@ -35,7 +35,7 @@ class CollegeListFragment : Fragment() {
                 override fun onClick(position: Int, model: College) {
                     val bundle = Bundle()
                     bundle.putSerializable("college", model)
-                    findNavController().navigate(R.id.action_navigation_collegeList_to_collegeFragment, bundle)
+                    findNavController().navigate(R.id.collegeFragment, bundle)
                     Log.d("UR Logging", "${model.name}")
                 }
             }

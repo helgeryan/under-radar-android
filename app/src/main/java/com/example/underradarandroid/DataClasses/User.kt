@@ -1,5 +1,7 @@
 package com.example.underradarandroid.DataClasses
 
+import java.io.Serializable
+
 data class User (
     val id: String = "",
     val firstName: String = "",
@@ -31,7 +33,7 @@ data class User (
     var yearsOfEligibility: Int? = null,
     var currentCollegeId: String? = null,
     var summerTeam: String? = null
-) {
+): Serializable {
     fun getHometownText(): String {
         return "$hometown, $state"
     }
@@ -57,7 +59,7 @@ data class Video (
     val thumbnail: String = "",
     val date: String = "",
     val videoUrl: String = "",
-)
+): Serializable
 
 data class ScoutInfo (
     val verifiedBy: String = "",
@@ -70,4 +72,4 @@ data class ScoutInfo (
     val popTime: String = "",
     val exitVelo: String = "",
     val workoutDescription: String = "",
-)
+): Serializable

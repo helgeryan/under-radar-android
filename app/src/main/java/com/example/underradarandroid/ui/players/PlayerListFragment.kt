@@ -31,18 +31,18 @@ class PlayerListFragment(private var users: Array<User>? = null) : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if (users != null) {
+        if (users != null || true) {
             Log.d("UR Comparison", users.toString())
-            val itemAdapter = PlayerAdapter(users!!)
+            val itemAdapter = PlayerAdapter(DatabaseManager.readUsers.value!!)
 
             itemAdapter.onClickListener = object: PlayerAdapter.OnClickListener {
                 override fun onClick(position: Int, model: User) {
-
-                    findNavController().navigate(R.id.playerFragment)
+                    val bundle = Bundle()
+                    bundle.putSerializable("user", model)
+                    findNavController().navigate(R.id.playerFragment, bundle)
                     Log.d("UR Logging", "${model.firstName}")
                 }
             }
-
             val recyclerView: RecyclerView = view.findViewById(R.id.recycleView)
             val layoutManager = LinearLayoutManager(context)
             recyclerView.layoutManager = layoutManager
@@ -52,11 +52,14 @@ class PlayerListFragment(private var users: Array<User>? = null) : Fragment() {
             recyclerView.addItemDecoration(dividerItemDecoration)
         } else {
             DatabaseManager.readUsers.observe(viewLifecycleOwner, Observer { userList ->
-                val playerList = userList.filter { it.isPlayer() }
+                val playerList = userList.filter { it.firstName != null }
                 val itemAdapter = PlayerAdapter(playerList.toTypedArray())
+
                 itemAdapter.onClickListener = object: PlayerAdapter.OnClickListener {
                     override fun onClick(position: Int, model: User) {
-                        findNavController().navigate(R.id.action_navigation_players_to_playerFragment)
+                        val bundle = Bundle()
+                        bundle.putSerializable("user", model)
+                        findNavController().navigate(R.id.playerFragment)
                         Log.d("UR Logging", "${model.firstName}")
                     }
                 }
