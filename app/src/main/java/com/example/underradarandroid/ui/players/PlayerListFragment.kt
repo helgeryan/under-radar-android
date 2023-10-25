@@ -37,7 +37,8 @@ class PlayerListFragment(private var users: Array<User>? = null) : Fragment() {
 
             itemAdapter.onClickListener = object: PlayerAdapter.OnClickListener {
                 override fun onClick(position: Int, model: User) {
-                    findNavController().navigate(R.id.action_navigation_players_to_playerFragment)
+
+                    findNavController().navigate(R.id.playerFragment)
                     Log.d("UR Logging", "${model.firstName}")
                 }
             }

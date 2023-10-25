@@ -17,6 +17,16 @@ class CollegeFragment : Fragment() {
 
     private lateinit var binding: FragmentCollegeBinding
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        val activity = activity
+        val actionBar = activity?.actionBar
+        actionBar?.title = "Hello"
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -47,6 +57,7 @@ class CollegeFragment : Fragment() {
 
         college?.let {
             val adapter = CollegePageAdapter(this, college)
+
             viewPager.adapter = adapter
             TabLayoutMediator(binding.tabLayout, viewPager) { tab, position ->
                 when (position) {
