@@ -1,5 +1,7 @@
 package com.example.underradarandroid.DataClasses
 
+import java.io.Serializable
+
 data class Event(
     val id : String = "",
     val title: String = "",
@@ -17,4 +19,6 @@ data class Event(
     var college: String? = null,
     val isPublished: Boolean = false,
     val isPendingReview: Boolean = true
-)
+): Serializable {
+
+}

@@ -36,7 +36,7 @@ class HomeStoriesListFragment : Fragment() {
                     override fun onClick(position: Int, model: Story) {
                         val bundle = Bundle()
                         bundle.putSerializable("story", model)
-                        findNavController().navigate(R.id.action_navigation_home_to_storyFragment)
+                        findNavController().navigate(R.id.action_navigation_home_to_storyFragment, bundle)
                         Log.d("UR Logging", "${model.title}")
                     }
                 }
