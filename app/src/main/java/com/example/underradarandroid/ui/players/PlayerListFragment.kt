@@ -13,9 +13,12 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.underradarandroid.DataClasses.Club
+import com.example.underradarandroid.DataClasses.College
 import com.example.underradarandroid.DataClasses.User
 import com.example.underradarandroid.R
 import com.example.underradarandroid.Resources.DatabaseManager.DatabaseManager
+import com.example.underradarandroid.Resources.DatabaseManager.hasCoaches
+import com.example.underradarandroid.Resources.DatabaseManager.hasCommits
 import com.example.underradarandroid.databinding.FragmentPlayerListBinding
 import com.example.underradarandroid.ui.clubs.ClubAdapter
 
@@ -28,12 +31,16 @@ class PlayerListFragment(private var users: Array<User>? = null) : Fragment() {
 
     private lateinit var viewModel: PlayerListViewModel
 
+
+    private val sort: (User) -> Boolean = { user: User ->  user.videos != null || user.scoutInfo != null || user.collegeCommit != null }
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if (users != null || true) {
+        if (users != null) {
             Log.d("UR Comparison", users.toString())
-            val itemAdapter = PlayerAdapter(DatabaseManager.readUsers.value!!)
+            val itemAdapter = PlayerAdapter(users!!)
 
             itemAdapter.onClickListener = object: PlayerAdapter.OnClickListener {
                 override fun onClick(position: Int, model: User) {
@@ -52,14 +59,14 @@ class PlayerListFragment(private var users: Array<User>? = null) : Fragment() {
             recyclerView.addItemDecoration(dividerItemDecoration)
         } else {
             DatabaseManager.readUsers.observe(viewLifecycleOwner, Observer { userList ->
-                val playerList = userList.filter { it.firstName != null }
-                val itemAdapter = PlayerAdapter(playerList.toTypedArray())
+                val playerList = userList.filter { it.isPlayer() }
+                val itemAdapter = PlayerAdapter(playerList.sortedByDescending(sort).toTypedArray())
 
                 itemAdapter.onClickListener = object: PlayerAdapter.OnClickListener {
                     override fun onClick(position: Int, model: User) {
                         val bundle = Bundle()
                         bundle.putSerializable("user", model)
-                        findNavController().navigate(R.id.playerFragment)
+                        findNavController().navigate(R.id.playerFragment, bundle)
                         Log.d("UR Logging", "${model.firstName}")
                     }
                 }
