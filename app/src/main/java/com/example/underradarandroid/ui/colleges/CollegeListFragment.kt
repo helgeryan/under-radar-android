@@ -14,6 +14,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.underradarandroid.DataClasses.College
 import com.example.underradarandroid.R
 import com.example.underradarandroid.Resources.DatabaseManager.DatabaseManager
+import com.example.underradarandroid.Resources.DatabaseManager.getCoachesForCollege
+import com.example.underradarandroid.Resources.DatabaseManager.hasCoaches
+import com.example.underradarandroid.Resources.DatabaseManager.hasCommits
 import com.example.underradarandroid.databinding.FragmentCollegeListBinding
 
 class CollegeListFragment : Fragment() {
@@ -26,10 +29,12 @@ class CollegeListFragment : Fragment() {
 
     private lateinit var viewModel: CollegeListViewModel
 
+    private val sort: (College) -> Boolean = {college: College -> DatabaseManager.hasCoaches(college.id) || DatabaseManager.hasCommits(college.id) }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         DatabaseManager.readCollege.observe(viewLifecycleOwner, Observer { collegeList ->
-            val sorted = collegeList.sortedByDescending { college -> college.name }.reversed()
+            val sorted = collegeList.sortedByDescending(sort)
             val itemAdapter = CollegesAdapter(sorted.toTypedArray())
             itemAdapter.onClickListener = object: CollegesAdapter.OnClickListener {
                 override fun onClick(position: Int, model: College) {
