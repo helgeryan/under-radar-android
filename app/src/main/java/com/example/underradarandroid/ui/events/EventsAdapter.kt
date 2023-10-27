@@ -17,7 +17,7 @@ class EventsAdapter(private val eventsList: Array<Event>) : RecyclerView.Adapter
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         // Inflate the layout for each item and return a new ViewHolder object
         val itemView =
-            LayoutInflater.from(parent.context).inflate(R.layout.items_list, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.event_row_item, parent, false)
         return MyViewHolder(itemView)
     }
 
@@ -32,7 +32,9 @@ class EventsAdapter(private val eventsList: Array<Event>) : RecyclerView.Adapter
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val event = eventsList[position]
         holder.name.text = event.title
-        holder.email.text = event.description
+        holder.description.text = event.description
+        holder.date.text = event.startDate
+        holder.state.text = event.state
 
         holder.itemView.setOnClickListener {
             if (onClickListener != null) {
@@ -48,6 +50,8 @@ class EventsAdapter(private val eventsList: Array<Event>) : RecyclerView.Adapter
     // This class defines the ViewHolder object for each item in the RecyclerView
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val name: TextView = itemView.findViewById(R.id.tvName)
-        val email: TextView = itemView.findViewById(R.id.tvLocation)
+        val description: TextView = itemView.findViewById(R.id.descriptionTextView)
+        val date: TextView = itemView.findViewById(R.id.dateTextView)
+        val state: TextView = itemView.findViewById(R.id.stateText)
     }
 }
