@@ -1,6 +1,7 @@
 package com.example.underradarandroid.Resources.DatabaseManager
 
 import android.util.Log
+import com.example.underradarandroid.DataClasses.CollegeConference
 import com.example.underradarandroid.DataClasses.User
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -21,4 +22,8 @@ fun DatabaseManager.getUsers() {
         .addOnFailureListener { error ->
             print("Error")
         }
+}
+
+fun DatabaseManager.getUserForId(id: String): User? {
+    return usersObservable.value?.firstOrNull() { id == it.id }
 }

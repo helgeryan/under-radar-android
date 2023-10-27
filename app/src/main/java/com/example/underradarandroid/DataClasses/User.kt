@@ -34,6 +34,10 @@ data class User (
     var currentCollegeId: String? = null,
     var summerTeam: String? = null
 ): Serializable {
+    fun getName(): String {
+        return "$firstName $lastName"
+    }
+
     fun getHometownText(): String {
         return "$hometown, $state"
     }

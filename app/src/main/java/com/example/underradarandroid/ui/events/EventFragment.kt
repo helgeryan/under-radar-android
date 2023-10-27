@@ -1,6 +1,7 @@
 package com.example.underradarandroid.ui.events
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +9,8 @@ import androidx.fragment.app.Fragment
 import com.example.underradarandroid.DataClasses.College
 import com.example.underradarandroid.DataClasses.Event
 import com.example.underradarandroid.R
+import com.example.underradarandroid.Resources.DatabaseManager.DatabaseManager
+import com.example.underradarandroid.Resources.DatabaseManager.getUserForId
 import com.example.underradarandroid.databinding.FragmentCollegeBinding
 import com.example.underradarandroid.databinding.FragmentEventBinding
 
@@ -36,7 +39,15 @@ class EventFragment : Fragment() {
 
         binding.titleTextView.text = event?.title
         binding.dateTextView.text = event?.startDate
-        binding.authorTextView.text = event?.authorId
+        if (event?.authorId == null) {
+            binding.authorTextView.visibility = View.GONE
+        } else {
+            binding.authorTextView.visibility = View.VISIBLE
+            event?.authorId?.let {
+                Log.d("UR Logging", DatabaseManager.getUserForId(event.authorId)?.getName() ?: "missing name")
+                binding.authorTextView.text = DatabaseManager.getUserForId(event.authorId)?.getName()
+            }
+        }
         binding.desciptionTextView.text = event?.description
 
         return root

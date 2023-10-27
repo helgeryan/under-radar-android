@@ -1,5 +1,7 @@
 package com.example.underradarandroid.DataClasses
 
+import com.example.underradarandroid.Resources.DatabaseManager.DatabaseManager
+import com.example.underradarandroid.Resources.DatabaseManager.getUserForId
 import java.io.Serializable
 
 data class Event(
@@ -22,3 +24,5 @@ data class Event(
 ): Serializable {
 
 }
+
+

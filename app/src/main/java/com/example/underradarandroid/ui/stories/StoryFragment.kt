@@ -1,14 +1,14 @@
 package com.example.underradarandroid.ui.stories
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.underradarandroid.DataClasses.Event
 import com.example.underradarandroid.DataClasses.Story
-import com.example.underradarandroid.R
-import com.example.underradarandroid.databinding.FragmentEventBinding
+import com.example.underradarandroid.Resources.DatabaseManager.DatabaseManager
+import com.example.underradarandroid.Resources.DatabaseManager.getUserForId
 import com.example.underradarandroid.databinding.FragmentStoryBinding
 
 class StoryFragment : Fragment() {
@@ -33,7 +33,16 @@ class StoryFragment : Fragment() {
         }
         binding.titleTextView.text = story?.title
         binding.dateTextView.text = story?.date
-        binding.authorTextView.text = story?.authorId
+        if (story?.authorId == null) {
+            binding.authorTextView.visibility = View.GONE
+        } else {
+            binding.authorTextView.visibility = View.VISIBLE
+            story?.authorId?.let {
+                Log.d("UR Logging", DatabaseManager.getUserForId(story.authorId)?.getName() ?: "missing name")
+
+                binding.authorTextView.text = DatabaseManager.getUserForId(story.authorId)?.getName()
+            }
+        }
         binding.desciptionTextView.text = story?.description
 
         return root
