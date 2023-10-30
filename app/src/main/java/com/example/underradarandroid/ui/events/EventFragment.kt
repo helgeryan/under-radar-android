@@ -1,5 +1,7 @@
 package com.example.underradarandroid.ui.events
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -20,7 +22,7 @@ import com.example.underradarandroid.databinding.FragmentEventBinding
 class EventFragment : Fragment() {
 
     private lateinit var binding: FragmentEventBinding
-
+    private lateinit var event: Event
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -32,25 +34,32 @@ class EventFragment : Fragment() {
     ): View? {
         binding = FragmentEventBinding.inflate(layoutInflater)
         val root = binding.root
-        val event = arguments?.getSerializable("event", Event::class.java)
+        val eventArg = arguments?.getSerializable("event", Event::class.java)
+        eventArg?.let {
+            this.event = eventArg
 
-
-        if (event?.headerImage == null) {
-            binding.eventImageView.visibility = View.GONE
-        } else {
-            binding.eventImageView.visibility = View.VISIBLE
+            binding.titleTextView.text = event?.title
+            binding.desciptionTextView.text = event?.text
+            bindDate()
+            bindHeaderImage()
+            bindAuthor()
+            bindAdditionalLink()
+            bindShareButton()
         }
 
-        binding.titleTextView.text = event?.title
+        return root
+    }
 
-        event?.startDate?.let {
-            val startDate = UnderRadarDateFormatter().getDisplayDate(event.startDate, "MM/dd")
-            event?.endDate.let {
-                val endDate = UnderRadarDateFormatter().getDisplayDate(event.startDate, "MM/dd")
-                binding.dateTextView.text = "$startDate - $endDate"
+    private fun bindAdditionalLink() {
+        event.additionalLink?.let {
+            binding.additonalInfoButton.setOnClickListener {
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(event.additionalLink) )
+                startActivity(intent)
             }
         }
+    }
 
+    private fun bindAuthor() {
         if (event?.authorId == null) {
             binding.authorTextView.visibility = View.GONE
         } else {
@@ -60,8 +69,37 @@ class EventFragment : Fragment() {
                 binding.authorTextView.text = DatabaseManager.getUserForId(event.authorId)?.getName()
             }
         }
-        binding.desciptionTextView.text = event?.text
+    }
 
-        return root
+    private fun bindHeaderImage() {
+        if (event?.headerImage == null) {
+            binding.eventImageView.visibility = View.GONE
+        } else {
+            binding.eventImageView.visibility = View.VISIBLE
+        }
+    }
+
+    private fun bindDate() {
+        event?.startDate?.let {
+            val startDate = UnderRadarDateFormatter().getDisplayDate(event.startDate, "MM/dd")
+            event?.endDate.let {
+                val endDate = UnderRadarDateFormatter().getDisplayDate(event.startDate, "MM/dd")
+                binding.dateTextView.text = "$startDate - $endDate"
+            }
+        }
+    }
+
+    private fun bindShareButton() {
+        binding.shareEventButton.setOnClickListener {
+            val id = event.id
+            val sendIntent: Intent = Intent().apply {
+                action = Intent.ACTION_SEND
+                putExtra(Intent.EXTRA_TEXT, "under-radar://open-event?id=$id")
+                type = "text/plain"
+            }
+
+            val shareIntent = Intent.createChooser(sendIntent, null)
+            startActivity(shareIntent)
+        }
     }
 }
