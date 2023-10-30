@@ -1,13 +1,16 @@
 package com.example.underradarandroid.ui.events
 
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.example.underradarandroid.DataClasses.College
 import com.example.underradarandroid.DataClasses.Event
 import com.example.underradarandroid.R
+import com.example.underradarandroid.Resources.Extensions.UnderRadarDateFormatter
 import com.example.underradarandroid.ui.colleges.CollegesAdapter
 
 
@@ -29,11 +32,12 @@ class EventsAdapter(private val eventsList: Array<Event>) : RecyclerView.Adapter
 
     // This method binds the data to the ViewHolder object
     // for each item in the RecyclerView
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val event = eventsList[position]
         holder.name.text = event.title
         holder.description.text = event.description
-        holder.date.text = event.startDate
+        holder.date.text = UnderRadarDateFormatter().daysInFuture(event.startDate)
         holder.state.text = event.state
 
         holder.itemView.setOnClickListener {
