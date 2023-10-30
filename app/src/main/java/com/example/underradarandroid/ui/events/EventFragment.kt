@@ -16,10 +16,11 @@ import com.example.underradarandroid.R
 import com.example.underradarandroid.Resources.DatabaseManager.DatabaseManager
 import com.example.underradarandroid.Resources.DatabaseManager.getUserForId
 import com.example.underradarandroid.Resources.Extensions.UnderRadarDateFormatter
+import com.example.underradarandroid.Resources.UnderRadarFragment
 import com.example.underradarandroid.databinding.FragmentCollegeBinding
 import com.example.underradarandroid.databinding.FragmentEventBinding
 
-class EventFragment : Fragment() {
+class EventFragment : UnderRadarFragment() {
 
     private lateinit var binding: FragmentEventBinding
     private lateinit var event: Event
@@ -53,8 +54,7 @@ class EventFragment : Fragment() {
     private fun bindAdditionalLink() {
         event.additionalLink?.let {
             binding.additonalInfoButton.setOnClickListener {
-                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(event.additionalLink) )
-                startActivity(intent)
+                openLink(Uri.parse(event.additionalLink))
             }
         }
     }
