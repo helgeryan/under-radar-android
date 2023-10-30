@@ -11,7 +11,7 @@ data class Story (
     val state : String = "",
     val isPublished : Boolean = false,
     val isPendingReview : Boolean = true,
-    val authorIdval: String = "",
+    val authorId: String = "",
 //    var sections: [StorySection]? = nil,
 //var tags: [StoryTag]? = nil,
 ): Serializable

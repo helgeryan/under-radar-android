@@ -34,7 +34,9 @@ class HomeEventsListFragment : Fragment() {
                 val itemAdapter = com.example.underradarandroid.ui.events.EventsAdapter(eventList)
                 itemAdapter.onClickListener = object: EventsAdapter.OnClickListener {
                     override fun onClick(position: Int, model: Event) {
-                        findNavController().navigate(R.id.action_navigation_home_to_eventFragment)
+                        val bundle = Bundle()
+                        bundle.putSerializable("event", model)
+                        findNavController().navigate(R.id.action_navigation_home_to_eventFragment, bundle)
                         Log.d("UR Logging", "${model.title}")
                     }
                 }
