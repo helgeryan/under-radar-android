@@ -92,14 +92,7 @@ class EventFragment : UnderRadarFragment() {
     private fun bindShareButton() {
         binding.shareEventButton.setOnClickListener {
             val id = event.id
-            val sendIntent: Intent = Intent().apply {
-                action = Intent.ACTION_SEND
-                putExtra(Intent.EXTRA_TEXT, "under-radar://open-event?id=$id")
-                type = "text/plain"
-            }
-
-            val shareIntent = Intent.createChooser(sendIntent, null)
-            startActivity(shareIntent)
+            shareLink("under-radar://open-event?id=$id")
         }
     }
 }
