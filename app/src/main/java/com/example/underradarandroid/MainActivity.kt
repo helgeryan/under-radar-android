@@ -1,9 +1,11 @@
 package com.example.underradarandroid
 
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -11,12 +13,17 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.underradarandroid.Resources.DatabaseManager.DatabaseManager
 import com.example.underradarandroid.Resources.DatabaseManager.getEventForId
+import com.example.underradarandroid.Resources.DatabaseManager.getUserForId
 import com.example.underradarandroid.databinding.ActivityMainBinding
 
 
 class MainActivity : AppCompatActivity() {
 
+    // region Private
     private lateinit var binding: ActivityMainBinding
+    // endregion Private
+
+    // region LifeCycle
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -39,22 +46,53 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-
-        val uri = intent.data
-        uri?.let {
-            Log.d("UR Logging", uri.toString())
-            val id = uri.getQueryParameter("id")
-            val bundle = Bundle()
-            val event = DatabaseManager.getEventForId(id!!)
-            bundle.putSerializable("event", event)
-            navController.navigate(R.id.action_navigation_home_to_eventFragment, bundle)
-            Log.d("UR Logging", "${event?.title}")
-        }
-
+        handleDeepLink()
     }
 
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
+    // endregion LifeCycle
+
+    // region DeepLinks
+    private fun handleDeepLink() {
+        val uri = intent.data
+        uri?.let {
+            if (uri.toString().contains("open-event")) {
+                handleOpenEvent(uri)
+            } else if (uri.toString().contains("open-user")) {
+                handleOpenUser(uri)
+            }
+        }
+    }
+
+    //
+
+    private fun handleOpenEvent(uri: Uri) {
+        val navController = findNavController(R.id.nav_host_fragment_activity_main)
+        val id = uri.getQueryParameter("id")
+        id?.let {
+            val event = DatabaseManager.getEventForId(id)
+            event?.let {
+                val bundle = Bundle()
+                bundle.putSerializable("event", event)
+                navController.navigate(R.id.action_navigation_home_to_eventFragment, bundle)
+            }
+        }
+    }
+
+    private fun handleOpenUser(uri: Uri) {
+        val navController = findNavController(R.id.nav_host_fragment_activity_main)
+        val id = uri.getQueryParameter("id")
+        id?.let {
+            val user = DatabaseManager.getUserForId(id)
+            user?.let {
+                val bundle = Bundle()
+                bundle.putSerializable("user", user)
+                navController.navigate(R.id.action_navigation_home_to_eventFragment, bundle)
+            }
+        }
+    }
+    // endregion DeepLinks
 }
