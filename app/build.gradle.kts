@@ -4,6 +4,9 @@ plugins {
 
     // Add the Google services Gradle plugin
     id("com.google.gms.google-services")
+
+    // Type safe arguments
+    id("androidx.navigation.safeargs.kotlin")
 }
 
 android {
@@ -69,4 +72,9 @@ dependencies {
     // https://firebase.google.com/docs/android/setup#available-libraries
     implementation("com.google.firebase:firebase-auth-ktx")
     implementation("com.google.firebase:firebase-firestore-ktx")
+
+    // Navigation
+    val navVersion = rootProject.extra.get("nav_version") as String
+    implementation("androidx.navigation:navigation-fragment-ktx:$navVersion")
+    implementation("androidx.navigation:navigation-ui-ktx:$navVersion")
 }
