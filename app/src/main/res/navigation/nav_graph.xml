@@ -46,4 +46,21 @@
             android:id="@+id/action_welcomeFragment_to_homeFragment1"
             app:destination="@id/homeFragment1" />
     </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.underradarandroid.SettingsFragment"
+        android:label="Settings"
+        tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/termsFragment"
+        android:name="com.example.underradarandroid.TermsFragment"
+        android:label="Terms &amp; Conditions"
+        tools:layout="@layout/fragment_terms" />
+    <action
+        android:id="@+id/action_global_termsFragment"
+        app:destination="@id/termsFragment"
+        app:enterAnim="@anim/slide_in_top"
+        app:exitAnim="@anim/slide_out_bottom"
+        app:popEnterAnim="@anim/slide_in_bottom"
+        app:popExitAnim="@anim/slide_out_top" />
 </navigation>
