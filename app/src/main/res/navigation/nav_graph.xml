@@ -9,5 +9,18 @@
         android:id="@+id/homeFragment1"
         android:name="com.example.underradarandroid.HomeFragment1"
         android:label="fragment_home1"
-        tools:layout="@layout/fragment_home1" />
+        tools:layout="@layout/fragment_home1" >
+        <action
+            android:id="@+id/action_homeFragment1_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.underradarandroid.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" />
 </navigation>
