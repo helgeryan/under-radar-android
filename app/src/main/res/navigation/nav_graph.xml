@@ -8,8 +8,8 @@
     <fragment
         android:id="@+id/homeFragment1"
         android:name="com.example.underradarandroid.HomeFragment1"
-        android:label="fragment_home1"
-        tools:layout="@layout/fragment_home1" >
+        android:label="Home"
+        tools:layout="@layout/fragment_home1">
         <action
             android:id="@+id/action_homeFragment1_to_loginFragment"
             app:destination="@id/loginFragment"
@@ -21,8 +21,8 @@
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.underradarandroid.LoginFragment"
-        android:label="fragment_login"
-        tools:layout="@layout/fragment_login" >
+        android:label="Login"
+        tools:layout="@layout/fragment_login">
         <action
             android:id="@+id/action_loginFragment_to_welcomeFragment"
             app:destination="@id/welcomeFragment"
@@ -34,7 +34,7 @@
     <fragment
         android:id="@+id/welcomeFragment"
         android:name="com.example.underradarandroid.WelcomeFragment"
-        android:label="fragment_welcome"
+        android:label="{username}"
         tools:layout="@layout/fragment_welcome" >
         <argument
             android:name="username"
