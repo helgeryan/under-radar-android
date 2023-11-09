@@ -1,14 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item
-        android:id="@+id/homeFragment1"
-        android:icon="@drawable/ic_home_black_24dp"
-        android:title="Home" />
+<!--    <item-->
+<!--        android:id="@+id/homeFragment1"-->
+<!--        android:icon="@drawable/ic_home_black_24dp"-->
+<!--        android:title="Home" />-->
+
+<!--    <item-->
+<!--        android:id="@+id/searchFragment"-->
+<!--        android:icon="@drawable/ic_players"-->
+<!--        android:title="Search" />-->
 
     <item
-        android:id="@+id/searchFragment"
+        android:id="@+id/homeFragment"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="Home"
+        />
+
+    <item
+        android:id="@+id/playerListFragment"
         android:icon="@drawable/ic_players"
-        android:title="Search" />
+        android:title="Players"
+        />
+
+    <item
+        android:id="@+id/collegeListFragment"
+        android:icon="@drawable/ic_college"
+        android:title="Colleges"
+        />
+
+    <item
+        android:id="@+id/clubListFragment"
+        android:icon="@drawable/ic_club"
+        android:title="Clubs"
+        />
 
 </menu>

@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.underradarandroid.DataClasses.Story
+import com.example.underradarandroid.NavGraphDirections
 import com.example.underradarandroid.R
 import com.example.underradarandroid.Resources.DatabaseManager.DatabaseManager
 import com.example.underradarandroid.ui.stories.StoriesAdapter
@@ -34,9 +35,8 @@ class HomeStoriesListFragment : Fragment() {
                 val itemAdapter = StoriesAdapter(storiesList)
                 itemAdapter.onClickListener = object: StoriesAdapter.OnClickListener {
                     override fun onClick(position: Int, model: Story) {
-                        val bundle = Bundle()
-                        bundle.putSerializable("story", model)
-                        findNavController().navigate(R.id.action_navigation_home_to_storyFragment, bundle)
+                        val action = NavGraphDirections.actionGlobalStoryFragment(model)
+                        findNavController().navigate(action)
                         Log.d("UR Logging", "${model.title}")
                     }
                 }

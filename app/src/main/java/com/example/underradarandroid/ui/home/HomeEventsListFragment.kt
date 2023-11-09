@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.underradarandroid.DataClasses.Event
+import com.example.underradarandroid.NavGraphDirections
 import com.example.underradarandroid.R
 import com.example.underradarandroid.Resources.DatabaseManager.DatabaseManager
 import com.example.underradarandroid.ui.events.EventsAdapter
@@ -34,9 +35,8 @@ class HomeEventsListFragment : Fragment() {
                 val itemAdapter = com.example.underradarandroid.ui.events.EventsAdapter(eventList)
                 itemAdapter.onClickListener = object: EventsAdapter.OnClickListener {
                     override fun onClick(position: Int, model: Event) {
-                        val bundle = Bundle()
-                        bundle.putSerializable("event", model)
-                        findNavController().navigate(R.id.action_navigation_home_to_eventFragment, bundle)
+                        val action = NavGraphDirections.actionGlobalEventFragment(model)
+                        findNavController().navigate(action)
                         Log.d("UR Logging", "${model.title}")
                     }
                 }

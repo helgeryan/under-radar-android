@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/homeFragment1">
+    app:startDestination="@id/homeFragment">
 
     <fragment
         android:id="@+id/homeFragment1"
@@ -68,4 +68,71 @@
         android:name="com.example.underradarandroid.SearchFragment"
         android:label="Search"
         tools:layout="@layout/fragment_search" />
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.underradarandroid.ui.home.HomeFragment"
+        android:label="Home"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/playerListFragment"
+        android:name="com.example.underradarandroid.ui.players.PlayerListFragment"
+        android:label="Players"
+        tools:layout="@layout/fragment_player_list" />
+    <fragment
+        android:id="@+id/collegeListFragment"
+        android:name="com.example.underradarandroid.ui.colleges.CollegeListFragment"
+        android:label="Colleges"
+        tools:layout="@layout/fragment_college_list" />
+    <fragment
+        android:id="@+id/clubListFragment"
+        android:name="com.example.underradarandroid.ui.clubs.ClubListFragment"
+        android:label="Clubs"
+        tools:layout="@layout/fragment_club_list" />
+    <fragment
+        android:id="@+id/eventFragment"
+        android:name="com.example.underradarandroid.ui.events.EventFragment"
+        android:label="Event">
+        <argument
+            android:name="event"
+            app:argType="com.example.underradarandroid.DataClasses.Event" />
+    </fragment>
+    <action android:id="@+id/action_global_eventFragment" app:destination="@id/eventFragment" />
+    <fragment
+        android:id="@+id/collegeFragment"
+        android:name="com.example.underradarandroid.ui.colleges.CollegeFragment"
+        android:label="College"
+        tools:layout="@layout/fragment_college">
+        <argument
+            android:name="college"
+            app:argType="com.example.underradarandroid.DataClasses.College" />
+    </fragment>
+    <action android:id="@+id/action_global_collegeFragment" app:destination="@id/collegeFragment" />
+    <fragment
+        android:id="@+id/storyFragment"
+        android:name="com.example.underradarandroid.ui.stories.StoryFragment"
+        android:label="Story" >
+        <argument
+            android:name="story"
+            app:argType="com.example.underradarandroid.DataClasses.Story" />
+    </fragment>
+    <action android:id="@+id/action_global_storyFragment" app:destination="@id/storyFragment" />
+    <fragment
+        android:id="@+id/playerFragment"
+        android:name="com.example.underradarandroid.ui.players.PlayerFragment"
+        android:label="Player">
+        <argument
+            android:name="player"
+            app:argType="com.example.underradarandroid.DataClasses.User" />
+    </fragment>
+    <action android:id="@+id/action_global_playerFragment" app:destination="@id/playerFragment" />
+    <fragment
+        android:id="@+id/clubFragment"
+        android:name="com.example.underradarandroid.ui.clubs.ClubFragment"
+        android:label="Club"
+        tools:layout="@layout/fragment_club">
+        <argument
+            android:name="club"
+            app:argType="com.example.underradarandroid.DataClasses.Club" />
+    </fragment>
+    <action android:id="@+id/action_global_clubFragment" app:destination="@id/clubFragment" />
 </navigation>

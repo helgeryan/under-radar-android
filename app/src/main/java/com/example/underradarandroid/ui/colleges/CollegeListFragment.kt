@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.underradarandroid.DataClasses.College
+import com.example.underradarandroid.NavGraphDirections
 import com.example.underradarandroid.R
 import com.example.underradarandroid.Resources.DatabaseManager.DatabaseManager
 import com.example.underradarandroid.Resources.DatabaseManager.getCoachesForCollege
@@ -38,9 +39,8 @@ class CollegeListFragment : Fragment() {
             val itemAdapter = CollegesAdapter(sorted.toTypedArray())
             itemAdapter.onClickListener = object: CollegesAdapter.OnClickListener {
                 override fun onClick(position: Int, model: College) {
-                    val bundle = Bundle()
-                    bundle.putSerializable("college", model)
-                    findNavController().navigate(R.id.collegeFragment, bundle)
+                    val action = NavGraphDirections.actionGlobalCollegeFragment(model)
+                    findNavController().navigate(action)
                     Log.d("UR Logging", "${model.name}")
                 }
             }

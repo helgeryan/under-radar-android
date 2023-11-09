@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.underradarandroid.DataClasses.Club
 import com.example.underradarandroid.DataClasses.College
 import com.example.underradarandroid.DataClasses.User
+import com.example.underradarandroid.NavGraphDirections
 import com.example.underradarandroid.R
 import com.example.underradarandroid.Resources.DatabaseManager.DatabaseManager
 import com.example.underradarandroid.Resources.DatabaseManager.hasCoaches
@@ -28,10 +29,7 @@ class PlayerListFragment(private var users: Array<User>? = null) : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
-
     private lateinit var viewModel: PlayerListViewModel
-
-
     private val sort: (User) -> Boolean = { user: User ->  user.videos != null || user.scoutInfo != null || user.collegeCommit != null }
 
 
@@ -44,9 +42,8 @@ class PlayerListFragment(private var users: Array<User>? = null) : Fragment() {
 
             itemAdapter.onClickListener = object: PlayerAdapter.OnClickListener {
                 override fun onClick(position: Int, model: User) {
-                    val bundle = Bundle()
-                    bundle.putSerializable("user", model)
-                    findNavController().navigate(R.id.playerFragment, bundle)
+                    val action = NavGraphDirections.actionGlobalPlayerFragment(model)
+                    findNavController().navigate(action)
                     Log.d("UR Logging", "${model.firstName}")
                 }
             }
@@ -64,9 +61,8 @@ class PlayerListFragment(private var users: Array<User>? = null) : Fragment() {
 
                 itemAdapter.onClickListener = object: PlayerAdapter.OnClickListener {
                     override fun onClick(position: Int, model: User) {
-                        val bundle = Bundle()
-                        bundle.putSerializable("user", model)
-                        findNavController().navigate(R.id.playerFragment, bundle)
+                        val action = NavGraphDirections.actionGlobalPlayerFragment(model)
+                        findNavController().navigate(action)
                         Log.d("UR Logging", "${model.firstName}")
                     }
                 }
