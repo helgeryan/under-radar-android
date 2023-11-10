@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.fragment.NavHostFragment
@@ -13,6 +14,7 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.onNavDestinationSelected
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.example.underradarandroid.Resources.AuthManager.AuthManager
 import com.example.underradarandroid.Resources.DatabaseManager.DatabaseManager
 import com.example.underradarandroid.databinding.ActivityMainBinding
 
@@ -42,6 +44,10 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         binding.bottomNav.setupWithNavController(navController)
         binding.navView.setupWithNavController(navController)
+
+        if (!AuthManager.isLoggedIn()) {
+            hideItems()
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -60,6 +66,13 @@ class MainActivity : AppCompatActivity() {
     }
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+    }
+
+    private  fun hideItems() {
+        binding.navView.menu.findItem(R.id.profileFragment).isVisible = false
+        binding.navView.menu.findItem(R.id.notificationsFragment).isVisible = false
+        binding.navView.menu.findItem(R.id.bookmarkListFragment).isVisible = false
+        binding.navView.menu.findItem(R.id.savedEventListFragment).isVisible = false
     }
 }
 //

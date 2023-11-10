@@ -145,4 +145,19 @@
         android:name="com.example.underradarandroid.ui.notifications.NotificationsFragment"
         android:label="Notifications"
         tools:layout="@layout/fragment_notifications" />
+    <fragment
+        android:id="@+id/bookmarkListFragment"
+        android:name="com.example.underradarandroid.ui.bookmarks.BookmarkListFragment"
+        android:label="Bookmarks"
+        tools:layout="@layout/fragment_bookmark_list" />
+    <fragment
+        android:id="@+id/savedEventListFragment"
+        android:name="com.example.underradarandroid.ui.savedevents.SavedEventListFragment"
+        android:label="Saved Events"
+        tools:layout="@layout/fragment_saved_event_list" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.underradarandroid.ui.ProfileFragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_profile" />
 </navigation>
