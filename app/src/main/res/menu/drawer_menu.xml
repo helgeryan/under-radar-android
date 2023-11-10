@@ -11,4 +11,10 @@
         android:icon="@drawable/ic_players"
         android:title="Search" />
 
+
+    <item
+        android:id="@+id/notificationsFragment"
+        android:icon="@drawable/ic_notifications"
+        android:title="Notifications" />
+
 </menu>

@@ -38,14 +38,14 @@
                 android:id="@+id/commitImage"
                 android:layout_width="15dp"
                 android:layout_height="15dp"
-                android:src="@drawable/ic_club"
+                android:src="@drawable/ic_commit"
                 app:tint="@color/yellow" />
 
             <ImageView
                 android:id="@+id/coachesImage"
                 android:layout_width="15dp"
                 android:layout_height="15dp"
-                android:src="@drawable/ic_college"
+                android:src="@drawable/ic_coach"
                 app:tint="@color/utrBlue" />
 
         </LinearLayout>

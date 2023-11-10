@@ -140,4 +140,9 @@
         android:name="com.example.underradarandroid.AboutFragment"
         android:label="About"
         tools:layout="@layout/fragment_about" />
+    <fragment
+        android:id="@+id/notificationsFragment"
+        android:name="com.example.underradarandroid.ui.notifications.NotificationsFragment"
+        android:label="Notifications"
+        tools:layout="@layout/fragment_notifications" />
 </navigation>

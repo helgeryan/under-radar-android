@@ -12,4 +12,5 @@
     <color name="utrLightestBlue">#000044</color>
     <color name="textGray">#AAAAAA</color>
     <color name="yellow">#BBBB00</color>
+    <color name="unreadNotificationColor">#EEEEEE</color>
 </resources>
