@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--LinearLayout orientation horizontal -->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/llMain"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:padding="10dp">
+
+    <ImageView
+        android:id="@+id/iconImageView"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@drawable/ic_notifications"
+        android:tint="@color/utrBlue"
+        tools:ignore="UseAppTint" />
+
+    <!--LinearLayout orientation Vertical -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:orientation="vertical">
+
+        <!--TextView for displaying Name -->
+        <TextView
+            android:id="@+id/notificationTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:textSize="14sp"
+            android:lineSpacingMultiplier="1.05"
+            android:fontFamily="@font/mont_semibold"
+            tools:text="Name" />
+
+        <!--TextView for displaying Email -->
+        <TextView
+            android:id="@+id/dateTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="#454545"
+            android:textSize="12sp"
+            android:fontFamily="@font/mont_semibold"
+            tools:text="Email" />
+
+    </LinearLayout>
+
+</LinearLayout>

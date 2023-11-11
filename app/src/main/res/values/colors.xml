@@ -7,9 +7,15 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="utrBlue">#0000DE</color>
+    <color name="utrBlue">#FF0000DE</color>
     <color name="utrLightBlue">#000088</color>
     <color name="utrLightestBlue">#000044</color>
     <color name="textGray">#AAAAAA</color>
+    <color name="commit">#FFDDDD00</color>
     <color name="yellow">#BBBB00</color>
+    <color name="unreadNotificationColor">#EEEEEE</color>
+    <color name="green">#00DE00</color>
+    <color name="valid">#FF00DE00</color>
+    <color name="invalid">#FFde0000</color>
+    <color name="video">#FFde0000</color>
 </resources>

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.about.AboutFragment">
+
+    <LinearLayout
+        android:id="@+id/aboutLinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ABOUT UNDER THE RADAR"
+            android:textSize="24sp"
+            android:textColor="@color/utrBlue"
+            android:fontFamily="@font/mont_bold"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Creating a new avenue for coaches and players to connect. Coaches can bookmark players and request contact information in just the click of a button. Players can upload videos and links that give coaches helpful information in the recruiting process."
+            android:textSize="14sp"
+            android:lineSpacingMultiplier="1.1"
+            android:textColor="@color/black"
+            android:fontFamily="@font/mont_regular"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="COACHES"
+            android:textSize="24sp"
+            android:textColor="@color/utrBlue"
+            android:fontFamily="@font/mont_bold"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="To find players you are interested in, navigate to the players tab and use the filtering and sorting options to locate the player. To view a player's contact information sign in and press the &quot;Request Contact Information&quot;quot button on the player's profile. This anonymously lets the player know someone has requested their information, so that players can be aware of the activity on their profile."
+            android:textSize="14sp"
+            android:lineSpacingMultiplier="1.1"
+            android:textColor="@color/black"
+            android:fontFamily="@font/mont_regular"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Want to promote a your team or a recruiting event you may be hosting? Submit an Story/Event request so that players who are interested will see them on the homepage. The request will be reviewed and once approved it will show up in the app!"
+            android:textSize="14sp"
+            android:lineSpacingMultiplier="1.1"
+            android:textColor="@color/black"
+            android:fontFamily="@font/mont_regular"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="PLAYERS"
+            android:textSize="24sp"
+            android:textColor="@color/utrBlue"
+            android:fontFamily="@font/mont_bold"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Create your player profile! Sign up and edit your profile with all the information needed for coaches. Does your team have a GameChanger account, or does your club have a team schedule? Share it by adding a link on your profile! Want to provide coaches with videos? Upload a set of videos to your profile so that they can viewed."
+            android:textSize="14sp"
+            android:lineSpacingMultiplier="1.1"
+            android:textColor="@color/black"
+            android:fontFamily="@font/mont_regular"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Get notified when a coach saves your profile in the app."
+            android:textSize="14sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/mont_regular"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Want to share your metrics so that coaches can see them? Have one of your coaches submit a player metric request. It is preferred that the coaches submit the request so that they can verify the numbers are accurate and in addition link the coach's profile to your account."
+            android:textSize="14sp"
+            android:lineSpacingMultiplier="1.1"
+            android:textColor="@color/black"
+            android:fontFamily="@font/mont_regular"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Share with us your commitment by submitting a commitment request. This will show up on the app on your profile and give you a unique commitment sticker when your name shows up on player lists."
+            android:textSize="14sp"
+            android:lineSpacingMultiplier="1.1"
+            android:textColor="@color/black"
+            android:fontFamily="@font/mont_regular"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="LEGEND"
+            android:textSize="24sp"
+            android:textColor="@color/utrBlue"
+            android:fontFamily="@font/mont_bold"
+            />
+
+        <!--RecyclerView-->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycleView"
+            android:layout_width="match_parent"
+            android:layout_height="475dp"
+            tools:listitem="@layout/fragment_legend_item"/>
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

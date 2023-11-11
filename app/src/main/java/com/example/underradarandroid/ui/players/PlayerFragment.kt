@@ -41,7 +41,7 @@ class PlayerFragment : Fragment() {
 
         binding = FragmentPlayerBinding.inflate(layoutInflater)
         val root = binding.root
-        val user = arguments?.getSerializable("user", User::class.java)
+        val user = arguments?.getSerializable("player", User::class.java)
         user?.year?.let {
             binding.yearText.text = "Class of ${user.year}"
         }

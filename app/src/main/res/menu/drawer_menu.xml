@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/aboutFragment"
+        android:icon="@drawable/baseline_info_24"
+        android:title="About" />
+
+    <item
+        android:id="@+id/notificationsFragment"
+        android:icon="@drawable/ic_notifications"
+        android:title="Notifications" />
+
+    <item
+        android:id="@+id/profileFragment"
+        android:icon="@drawable/ic_default_profile"
+        android:title="Profile" />
+
+    <item
+        android:id="@+id/bookmarkListFragment"
+        android:icon="@drawable/ic_save"
+        android:title="Bookmarks" />
+
+    <item
+        android:id="@+id/savedEventListFragment"
+        android:icon="@drawable/ic_calendar"
+        android:title="Saved Events" />
+
+</menu>

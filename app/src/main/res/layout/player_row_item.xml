@@ -41,7 +41,7 @@
                 android:id="@+id/commitImage"
                 android:layout_width="15dp"
                 android:layout_height="15dp"
-                android:src="@drawable/ic_club"
+                android:src="@drawable/ic_commit"
                 app:tint="@color/yellow"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"

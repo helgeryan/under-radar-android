@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.underradarandroid.DataClasses.Club
 import com.example.underradarandroid.DataClasses.College
+import com.example.underradarandroid.NavGraphDirections
 import com.example.underradarandroid.R
 import com.example.underradarandroid.Resources.DatabaseManager.DatabaseManager
 import com.example.underradarandroid.databinding.FragmentClubListBinding
@@ -37,9 +38,8 @@ class ClubListFragment : Fragment() {
             val itemAdapter = ClubAdapter(clubList)
             itemAdapter.onClickListener = object: ClubAdapter.OnClickListener {
                 override fun onClick(position: Int, model: Club) {
-                    val bundle = Bundle()
-                    bundle.putSerializable("club", model)
-                    findNavController().navigate(R.id.action_navigation_clubs_to_clubFragment, bundle)
+                    val action = NavGraphDirections.actionGlobalClubFragment(model)
+                    findNavController().navigate(action)
                     Log.d("UR Logging", "${model.name}")
                 }
             }
