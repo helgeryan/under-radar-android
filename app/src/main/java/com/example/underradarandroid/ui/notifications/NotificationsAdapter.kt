@@ -1,5 +1,6 @@
 package com.example.underradarandroid.ui.notifications
 
+import android.graphics.PorterDuff
 import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.RequiresApi
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.underradarandroid.DataClasses.UserNotification
 import com.example.underradarandroid.R
@@ -36,7 +38,8 @@ class NotificationsAdapter(private val notifications: Array<UserNotification>) :
         val notification = notifications[position]
         holder.notificationText.text = notification.text
         holder.dateText.text = UnderRadarDateFormatter().daysAwayString(notification.date)
-        holder.iconImageView.setColorFilter(R.color.utrBlue)
+        val color = ContextCompat.getColor(holder.iconImageView.context, R.color.utrBlue)
+        holder.iconImageView.setColorFilter(color, PorterDuff.Mode.SRC_ATOP)
         holder.iconImageView.setImageResource(notification.getIcon())
         if (!notification.isRead) {
             holder.itemView.setBackgroundResource(R.color.unreadNotificationColor)

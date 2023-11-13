@@ -1,5 +1,7 @@
 package com.example.underradarandroid
 
+import android.graphics.ColorFilter
+import android.graphics.PorterDuff
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -8,6 +10,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.fragment.NavHostFragment
@@ -66,6 +69,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.options_menu, menu)
+
         return true
     }
 
@@ -82,7 +86,7 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
-    private  fun setMenuItemsVisible(isVisible: Boolean) {
+    private fun setMenuItemsVisible(isVisible: Boolean) {
         binding.navView.menu.findItem(R.id.profileFragment).isVisible = isVisible
         binding.navView.menu.findItem(R.id.notificationsFragment).isVisible = isVisible
         binding.navView.menu.findItem(R.id.bookmarkListFragment).isVisible = isVisible
@@ -90,6 +94,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun configureDrawerMenu(user: User? = null) {
+
         val headerView = binding.navView.getHeaderView(0)
         val button: Button = headerView.findViewById(R.id.signin_button)
         val nameTextView: TextView = headerView.findViewById(R.id.nameTextView)
