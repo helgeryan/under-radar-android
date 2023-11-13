@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.Button
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.fragment.NavHostFragment
@@ -17,6 +18,10 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.underradarandroid.Resources.AuthManager.AuthManager
 import com.example.underradarandroid.Resources.DatabaseManager.DatabaseManager
 import com.example.underradarandroid.databinding.ActivityMainBinding
+import com.example.underradarandroid.ui.login.AuthFragment
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
@@ -45,9 +50,13 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNav.setupWithNavController(navController)
         binding.navView.setupWithNavController(navController)
 
-        if (!AuthManager.isLoggedIn()) {
-            hideItems()
+        configureDrawerMenu()
+
+        AuthManager.readUser.observe(this) { user ->
+            val isLoggedIn = user != null
+            setMenuItemsVisible(isLoggedIn)
         }
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -68,11 +77,26 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
-    private  fun hideItems() {
-        binding.navView.menu.findItem(R.id.profileFragment).isVisible = false
-        binding.navView.menu.findItem(R.id.notificationsFragment).isVisible = false
-        binding.navView.menu.findItem(R.id.bookmarkListFragment).isVisible = false
-        binding.navView.menu.findItem(R.id.savedEventListFragment).isVisible = false
+    private  fun setMenuItemsVisible(isVisible: Boolean) {
+        binding.navView.menu.findItem(R.id.profileFragment).isVisible = isVisible
+        binding.navView.menu.findItem(R.id.notificationsFragment).isVisible = isVisible
+        binding.navView.menu.findItem(R.id.bookmarkListFragment).isVisible = isVisible
+        binding.navView.menu.findItem(R.id.savedEventListFragment).isVisible = isVisible
+    }
+
+    private fun configureDrawerMenu() {
+        val headerView = binding.navView.getHeaderView(0)
+        val button: Button = headerView.findViewById(R.id.signin_button)
+        button.setOnClickListener {
+            if (AuthManager.readUser.value != null) {
+                AuthManager.logout()
+            } else {
+                val modal = AuthFragment()
+
+                supportFragmentManager.let { modal.show(it, AuthFragment.TAG) }
+                binding.drawerLayout.close()
+            }
+        }
     }
 }
 //

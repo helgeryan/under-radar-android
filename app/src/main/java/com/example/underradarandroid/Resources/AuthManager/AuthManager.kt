@@ -1,27 +1,77 @@
 package com.example.underradarandroid.Resources.AuthManager
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.underradarandroid.DataClasses.Club
-import com.example.underradarandroid.DataClasses.College
-import com.example.underradarandroid.DataClasses.CollegeConference
-import com.example.underradarandroid.DataClasses.Event
-import com.example.underradarandroid.DataClasses.SavedEvent
-import com.example.underradarandroid.DataClasses.Story
 import com.example.underradarandroid.DataClasses.User
-import com.example.underradarandroid.DataClasses.UserNotification
+import com.example.underradarandroid.Resources.DatabaseManager.DatabaseManager
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 object AuthManager {
-    const val storiesCollection: String = "headlines"
+    private val auth: FirebaseAuth = Firebase.auth
 
-    var currentUser = MutableLiveData<User?>()
+    private var userSession: FirebaseUser? = auth.currentUser
+    private var currentUser = MutableLiveData<User?>()
     val readUser : LiveData<User?> get() = currentUser
 
+    init {
+        fetchUser()
+    }
+
     fun isLoggedIn(): Boolean {
-        return false
+        return auth.currentUser != null
     }
 
     fun refresh() {
 
+    }
+
+    fun login(email: String, password: String, completion: (Boolean) -> Unit) {
+            auth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        // Sign in success, update UI with the signed-in user's information
+                        fetchUser()
+                        completion(true)
+                    } else {
+                        // If sign in fails, display a message to the user.
+                        completion(false)
+                    }
+                }
+    }
+
+    fun logout() {
+        auth.signOut()
+        currentUser.value = null
+        userSession = null
+    }
+
+    private fun fetchUser() {
+        val id = auth.currentUser?.uid
+
+        if (id == null) {
+            currentUser.value = null
+            return
+        }
+
+        id?.let {
+            Firebase.firestore.collection(DatabaseManager.usersCollection).document(id).get()
+                .addOnSuccessListener { result ->
+                    try {
+                        currentUser.value = result.toObject(User::class.java)
+                    } catch (e: RuntimeException) {
+                        Log.d("Error", e.message.toString())
+                    }
+
+                    Log.d("Under Radar", "Successfully got user")
+                }
+                .addOnFailureListener { error ->
+                    print("Error")
+                }
+        }
     }
 }
