@@ -6,6 +6,8 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.Button
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.fragment.NavHostFragment
@@ -15,6 +17,7 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.onNavDestinationSelected
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.example.underradarandroid.DataClasses.User
 import com.example.underradarandroid.Resources.AuthManager.AuthManager
 import com.example.underradarandroid.Resources.DatabaseManager.DatabaseManager
 import com.example.underradarandroid.databinding.ActivityMainBinding
@@ -22,6 +25,7 @@ import com.example.underradarandroid.ui.login.AuthFragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.squareup.picasso.Picasso
 
 class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
@@ -55,6 +59,7 @@ class MainActivity : AppCompatActivity() {
         AuthManager.readUser.observe(this) { user ->
             val isLoggedIn = user != null
             setMenuItemsVisible(isLoggedIn)
+            configureDrawerMenu(user)
         }
 
     }
@@ -84,9 +89,21 @@ class MainActivity : AppCompatActivity() {
         binding.navView.menu.findItem(R.id.savedEventListFragment).isVisible = isVisible
     }
 
-    private fun configureDrawerMenu() {
+    private fun configureDrawerMenu(user: User? = null) {
         val headerView = binding.navView.getHeaderView(0)
         val button: Button = headerView.findViewById(R.id.signin_button)
+        val nameTextView: TextView = headerView.findViewById(R.id.nameTextView)
+        val emailTextView: TextView = headerView.findViewById(R.id.emailTextView)
+        val profilePicImageView: ImageView = headerView.findViewById(R.id.profileImageView)
+        if (user == null) {
+            button.visibility = View.VISIBLE
+            nameTextView.visibility = View.GONE
+            emailTextView.visibility = View.GONE
+        } else {
+            button.visibility = View.GONE
+            nameTextView.visibility = View.VISIBLE
+            emailTextView.visibility = View.VISIBLE
+        }
         button.setOnClickListener {
             if (AuthManager.readUser.value != null) {
                 AuthManager.logout()
@@ -95,6 +112,17 @@ class MainActivity : AppCompatActivity() {
 
                 supportFragmentManager.let { modal.show(it, AuthFragment.TAG) }
                 binding.drawerLayout.close()
+            }
+        }
+        user?.let {
+            nameTextView.text = user.getName()
+            emailTextView.text = user.email
+            user.profilePicUrl?.let {
+                Picasso
+                    .get()
+                    .load(user.profilePicUrl)
+                    .placeholder(R.drawable.ic_default_profile)
+                    .into(profilePicImageView)
             }
         }
     }
