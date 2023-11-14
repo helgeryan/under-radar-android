@@ -2,6 +2,7 @@ package com.example.underradarandroid
 
 import android.graphics.ColorFilter
 import android.graphics.PorterDuff
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -13,6 +14,7 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -23,6 +25,8 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.underradarandroid.DataClasses.User
 import com.example.underradarandroid.Resources.AuthManager.AuthManager
 import com.example.underradarandroid.Resources.DatabaseManager.DatabaseManager
+import com.example.underradarandroid.Resources.DatabaseManager.getEventForId
+import com.example.underradarandroid.Resources.DatabaseManager.getUserForId
 import com.example.underradarandroid.databinding.ActivityMainBinding
 import com.example.underradarandroid.ui.login.AuthFragment
 import com.google.firebase.auth.FirebaseAuth
@@ -65,6 +69,8 @@ class MainActivity : AppCompatActivity() {
             configureDrawerMenu(user)
         }
 
+        AuthManager.logout()
+        handleDeepLink()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -131,6 +137,41 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
+        // region DeepLinks
+    private fun handleDeepLink() {
+        val uri = intent.data
+        uri?.let {
+            if (uri.toString().contains("open-event")) {
+                handleOpenEvent(uri)
+            } else if (uri.toString().contains("open-user")) {
+                handleOpenUser(uri)
+            }
+        }
+    }
+
+    private fun handleOpenEvent(uri: Uri) {
+        val id = uri.getQueryParameter("id")
+        id?.let {
+            val event = DatabaseManager.getEventForId(id)
+            event?.let {
+                val action = NavGraphDirections.actionGlobalEventFragment(event)
+                navController.navigate(action)
+            }
+        }
+    }
+
+    private fun handleOpenUser(uri: Uri) {
+        val id = uri.getQueryParameter("id")
+        id?.let {
+            val user = DatabaseManager.getUserForId(id)
+            user?.let {
+                val action = NavGraphDirections.actionGlobalPlayerFragment(user)
+                navController.navigate(action)
+            }
+        }
+    }
+    // endregion DeepLinks
 }
 //
 //import android.net.Uri
@@ -185,43 +226,7 @@ class MainActivity : AppCompatActivity() {
 //    }
 //    // endregion LifeCycle
 //
-//    // region DeepLinks
-//    private fun handleDeepLink() {
-//        val uri = intent.data
-//        uri?.let {
-//            if (uri.toString().contains("open-event")) {
-//                handleOpenEvent(uri)
-//            } else if (uri.toString().contains("open-user")) {
-//                handleOpenUser(uri)
-//            }
-//        }
-//    }
-//
-//    private fun handleOpenEvent(uri: Uri) {
-//        val navController = findNavController(R.id.nav_host_fragment_activity_main)
-//        val id = uri.getQueryParameter("id")
-//        id?.let {
-//            val event = DatabaseManager.getEventForId(id)
-//            event?.let {
-//                val bundle = Bundle()
-//                bundle.putSerializable("event", event)
-//                navController.navigate(R.id.action_navigation_home_to_eventFragment, bundle)
-//            }
-//        }
-//    }
-//
-//    private fun handleOpenUser(uri: Uri) {
-//        val navController = findNavController(R.id.nav_host_fragment_activity_main)
-//        val id = uri.getQueryParameter("id")
-//        id?.let {
-//            val user = DatabaseManager.getUserForId(id)
-//            user?.let {
-//                val bundle = Bundle()
-//                bundle.putSerializable("user", user)
-//                navController.navigate(R.id.action_navigation_home_to_eventFragment, bundle)
-//            }
-//        }
-//    }
-//    // endregion DeepLinks
+
+
 //}
 

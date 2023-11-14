@@ -51,6 +51,8 @@
         android:fontFamily="@font/mont_semibold"
         android:textColor="@color/utrBlue"
         android:text="Sign In"
+        android:background="@color/transparent"
+        android:textAllCaps="false"
         />
 
 

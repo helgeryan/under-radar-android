@@ -48,6 +48,7 @@
         app:headerLayout="@layout/drawer_header"
         app:itemTextAppearance="@style/tab_font"
         app:itemIconTint="@color/textGray"
+        android:background="@color/white"
         />
 
 </androidx.drawerlayout.widget.DrawerLayout>

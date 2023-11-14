@@ -1,5 +1,6 @@
 package com.example.underradarandroid.ui
 
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -11,13 +12,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.underradarandroid.DataClasses.User
 import com.example.underradarandroid.R
 import com.example.underradarandroid.Resources.AuthManager.AuthManager
+import com.example.underradarandroid.Resources.UnderRadarFragment
 import com.example.underradarandroid.databinding.FragmentPlayerBinding
 import com.example.underradarandroid.databinding.FragmentProfileBinding
 import com.example.underradarandroid.ui.players.PlayerVideoAdapter
 import com.squareup.picasso.Picasso
 
 
-class ProfileFragment : Fragment() {
+class ProfileFragment : UnderRadarFragment() {
     private lateinit var binding: FragmentProfileBinding
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
@@ -35,14 +37,34 @@ class ProfileFragment : Fragment() {
         binding = FragmentProfileBinding.inflate(layoutInflater)
         val root = binding.root
         val user = AuthManager.readUser.value
+
+        binding.shareButton.setOnClickListener {
+            val userId = user!!.id
+            shareLink("under-radar://open-user?id=$userId")
+        }
+
         user?.year?.let {
             binding.yearText.text = "Class of ${user.year}"
         }
 
         binding.firstNameText.text = user?.firstName
         binding.lastNameText.text = user?.lastName
-        binding.hometownText.text = user?.getHometownText()
-        binding.highSchoolText.text = user?.school
+        if (user?.isPlayer() == true) {
+            binding.hometownText.text = user?.getHometownText()
+            binding.highSchoolText.text = user?.school
+        } else {
+            binding.hometownText.visibility = View.GONE
+            binding.highSchoolText.visibility = View.GONE
+        }
+
+        if (user?.email == null && user?.phone == null) {
+            binding.contactHeaderTextView.visibility = View.GONE
+            binding.emailTextView.visibility = View.GONE
+            binding.phoneTextView.visibility = View.GONE
+        } else {
+            binding.emailTextView.text = user?.email
+            binding.phoneTextView.text = user?.phone
+        }
 
         user?.profilePicUrl?.let {
             Picasso
