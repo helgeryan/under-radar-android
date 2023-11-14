@@ -35,7 +35,7 @@ class NotificationsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        DatabaseManager.notificationsObservable.observe(viewLifecycleOwner, Observer { notifications ->
+        DatabaseManager.readNotifications.observe(viewLifecycleOwner, Observer { notifications ->
 
             val itemAdapter = NotificationsAdapter(notifications)
             itemAdapter.onClickListener = object: NotificationsAdapter.OnClickListener {
