@@ -20,19 +20,19 @@ class ClubPageAdapter( fm: Fragment, val club: Club) : FragmentStateAdapter(fm) 
         when(position) {
             0 -> {
                 val clubPlayers = DatabaseManager.getPlayersForClub(club.id)
-                return PlayerListFragment(clubPlayers)
+                return PlayerListFragment(clubPlayers, "No players at this time")
             }
             1 -> {
                 val clubCoaches = DatabaseManager.getCoachesForClub(club.id)
-                return PlayerListFragment(clubCoaches)
+                return PlayerListFragment(clubCoaches, "No coaches at this time")
             }
             2 -> {
                 val clubCommitments = DatabaseManager.getCommitmentsForClub(club.id)
-                return PlayerListFragment(clubCommitments)
+                return PlayerListFragment(clubCommitments, "No commitments at this time")
             }
             else -> {
                 val clubCoaches = DatabaseManager.getCoachesForClub(club.id)
-                return PlayerListFragment(clubCoaches)
+                return PlayerListFragment(clubCoaches, "No coaches at this time")
             }
         }
     }
