@@ -33,27 +33,35 @@ data class User (
     var yearsOfEligibility: Int? = null,
     var currentCollegeId: String? = null,
     var summerTeam: String? = null
-): Serializable {
-    fun getName(): String {
-        return "$firstName $lastName"
-    }
+): Serializable
 
-    fun getHometownText(): String {
-        return "$hometown, $state"
-    }
-
-    fun isPlayer(): Boolean {
-        return when(profileType) {
-            0,1 -> true
-            else -> false
-        }
-    }
+class UserHelper(private val user: User) {
     fun isCoach(): Boolean {
-        return when(profileType) {
+        return when(user.profileType) {
             0,1 -> false
             else -> true
         }
     }
+
+    fun isPlayer(): Boolean {
+        return when(user.profileType) {
+            0,1 -> true
+            else -> false
+        }
+    }
+
+    fun getName(): String {
+        val firstName = user.firstName
+        val lastName = user.lastName
+        return "$firstName $lastName"
+    }
+
+    fun getHometownText(): String {
+        val hometown = user.hometown
+        val state = user.state
+        return "$hometown, $state"
+    }
+
 }
 
 

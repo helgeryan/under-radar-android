@@ -23,12 +23,14 @@ import androidx.navigation.ui.onNavDestinationSelected
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.underradarandroid.DataClasses.User
+import com.example.underradarandroid.DataClasses.UserHelper
 import com.example.underradarandroid.Resources.AuthManager.AuthManager
 import com.example.underradarandroid.Resources.DatabaseManager.DatabaseManager
 import com.example.underradarandroid.Resources.DatabaseManager.getEventForId
 import com.example.underradarandroid.Resources.DatabaseManager.getUserForId
 import com.example.underradarandroid.databinding.ActivityMainBinding
 import com.example.underradarandroid.ui.login.AuthFragment
+import com.example.underradarandroid.ui.login.AuthManagerFragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -119,14 +121,14 @@ class MainActivity : AppCompatActivity() {
             if (AuthManager.readUser.value != null) {
                 AuthManager.logout()
             } else {
-                val modal = AuthFragment()
+                val modal = AuthManagerFragment()
 
-                supportFragmentManager.let { modal.show(it, AuthFragment.TAG) }
+                supportFragmentManager.let { modal.show(it, AuthManagerFragment.TAG) }
                 binding.drawerLayout.close()
             }
         }
         user?.let {
-            nameTextView.text = user.getName()
+            nameTextView.text = UserHelper(user).getName()
             emailTextView.text = user.email
             user.profilePicUrl?.let {
                 Picasso

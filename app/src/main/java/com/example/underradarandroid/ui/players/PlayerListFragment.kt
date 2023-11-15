@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.underradarandroid.DataClasses.Club
 import com.example.underradarandroid.DataClasses.College
 import com.example.underradarandroid.DataClasses.User
+import com.example.underradarandroid.DataClasses.UserHelper
 import com.example.underradarandroid.NavGraphDirections
 import com.example.underradarandroid.R
 import com.example.underradarandroid.Resources.DatabaseManager.DatabaseManager
@@ -73,7 +74,7 @@ class PlayerListFragment(private var users: Array<User>? = null, private val emp
                     emptyTextView.text = emptyText
                     emptyTextView.visibility = View.VISIBLE
                 }
-                val playerList = userList.filter { it.isPlayer() }
+                val playerList = userList.filter { UserHelper(it).isPlayer() }
                 val itemAdapter = PlayerAdapter(playerList.sortedByDescending(sort).toTypedArray())
 
                 itemAdapter.onClickListener = object: PlayerAdapter.OnClickListener {

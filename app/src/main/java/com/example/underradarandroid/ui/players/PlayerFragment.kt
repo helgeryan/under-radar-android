@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.underradarandroid.DataClasses.College
 import com.example.underradarandroid.DataClasses.User
+import com.example.underradarandroid.DataClasses.UserHelper
 import com.example.underradarandroid.DataClasses.Video
 import com.example.underradarandroid.R
 import com.example.underradarandroid.databinding.FragmentCollegeBinding
@@ -42,30 +43,33 @@ class PlayerFragment : Fragment() {
         binding = FragmentPlayerBinding.inflate(layoutInflater)
         val root = binding.root
         val user = arguments?.getSerializable("player", User::class.java)
-        user?.year?.let {
-            binding.yearText.text = "Class of ${user.year}"
-        }
 
-        binding.firstNameText.text = user?.firstName
-        binding.lastNameText.text = user?.lastName
-        binding.hometownText.text = user?.getHometownText()
-        binding.highSchoolText.text = user?.school
+        user?.let {
+            user.year?.let {
+                binding.yearText.text = "Class of ${user.year}"
+            }
 
-        user?.profilePicUrl?.let {
-            Picasso
-                .get()
-                .load(user.profilePicUrl)
-                .placeholder(R.drawable.ic_club)
-                .into(binding.profileImageView)
-        }
+            binding.firstNameText.text = user.firstName
+            binding.lastNameText.text = user.lastName
+            binding.hometownText.text = UserHelper(user).getHometownText()
+            binding.highSchoolText.text = user.school
 
-        val videos = user?.videos
-        videos?.let {
-            val videoAdapter = PlayerVideoAdapter(videos.toTypedArray(), context)
-            val recyclerView = binding.videoRecyclerView
-            val layoutManager = LinearLayoutManager(context)
-            recyclerView.layoutManager = layoutManager
-            recyclerView.adapter = videoAdapter
+            user.profilePicUrl?.let {
+                Picasso
+                    .get()
+                    .load(user.profilePicUrl)
+                    .placeholder(R.drawable.ic_club)
+                    .into(binding.profileImageView)
+            }
+
+            val videos = user.videos
+            videos?.let {
+                val videoAdapter = PlayerVideoAdapter(videos.toTypedArray(), context)
+                val recyclerView = binding.videoRecyclerView
+                val layoutManager = LinearLayoutManager(context)
+                recyclerView.layoutManager = layoutManager
+                recyclerView.adapter = videoAdapter
+            }
         }
 
         return root

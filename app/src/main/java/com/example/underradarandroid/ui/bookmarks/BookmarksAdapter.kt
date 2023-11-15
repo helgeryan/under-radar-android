@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.underradarandroid.DataClasses.Bookmark
 import com.example.underradarandroid.DataClasses.User
+import com.example.underradarandroid.DataClasses.UserHelper
 import com.example.underradarandroid.R
 import com.example.underradarandroid.Resources.DatabaseManager.DatabaseManager
 import com.example.underradarandroid.Resources.DatabaseManager.getUserForId
@@ -40,7 +41,7 @@ class BookmarksAdapter(private val bookmarkList: Array<Bookmark>) : RecyclerView
         player?.let {
             holder.name.text = player.firstName + " " + player.lastName
 
-            holder.hometown.text = player.getHometownText()
+            holder.hometown.text = UserHelper(player).getHometownText()
             holder.gradYear.text = "${player.year}"
 
             if (player.collegeCommit == null) {

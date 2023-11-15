@@ -10,6 +10,8 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import org.json.JSONObject
+import java.io.Serializable
 
 object AuthManager {
     private val auth: FirebaseAuth = Firebase.auth
@@ -43,6 +45,27 @@ object AuthManager {
                     }
                 }
     }
+
+    fun createUser(email: String, password: String, firstName: String, lastName: String, profileType: Int, completion: () -> Unit) {
+        auth.createUserWithEmailAndPassword(email, password)
+            .addOnSuccessListener { result ->
+                userSession = result.user
+                val user = User(result.user!!.uid, firstName, lastName, email, "", 1)
+                Firebase.firestore.collection(DatabaseManager.usersCollection).document(user.id)
+                    .set(user)
+                    .addOnSuccessListener {
+                        fetchUser()
+                        completion()
+                    }
+                    .addOnFailureListener {
+
+                    }
+            }
+            .addOnFailureListener {
+
+            }
+    }
+
 
     fun logout() {
         auth.signOut()

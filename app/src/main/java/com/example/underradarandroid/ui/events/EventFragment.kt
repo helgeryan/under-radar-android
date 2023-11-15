@@ -12,6 +12,7 @@ import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import com.example.underradarandroid.DataClasses.College
 import com.example.underradarandroid.DataClasses.Event
+import com.example.underradarandroid.DataClasses.UserHelper
 import com.example.underradarandroid.R
 import com.example.underradarandroid.Resources.DatabaseManager.DatabaseManager
 import com.example.underradarandroid.Resources.DatabaseManager.getUserForId
@@ -65,8 +66,10 @@ class EventFragment : UnderRadarFragment() {
         } else {
             binding.authorTextView.visibility = View.VISIBLE
             event?.authorId?.let {
-                Log.d("UR Logging", DatabaseManager.getUserForId(event.authorId)?.getName() ?: "missing name")
-                binding.authorTextView.text = DatabaseManager.getUserForId(event.authorId)?.getName()
+                val user = DatabaseManager.getUserForId(event.authorId)
+                user?.let {
+                    binding.authorTextView.text = UserHelper(user).getName()
+                }
             }
         }
     }

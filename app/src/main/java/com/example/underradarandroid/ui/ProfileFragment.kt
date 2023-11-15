@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.underradarandroid.DataClasses.User
+import com.example.underradarandroid.DataClasses.UserHelper
 import com.example.underradarandroid.R
 import com.example.underradarandroid.Resources.AuthManager.AuthManager
 import com.example.underradarandroid.Resources.UnderRadarFragment
@@ -43,36 +44,39 @@ class ProfileFragment : UnderRadarFragment() {
             shareLink("under-radar://open-user?id=$userId")
         }
 
-        user?.year?.let {
-            binding.yearText.text = "Class of ${user.year}"
+        user?.let {
+            user.year?.let {
+                binding.yearText.text = "Class of ${user.year}"
+            }
+
+            binding.firstNameText.text = user.firstName
+            binding.lastNameText.text = user.lastName
+            if (UserHelper(user).isPlayer()) {
+                binding.hometownText.text = UserHelper(user).getHometownText()
+                binding.highSchoolText.text = user.school
+            } else {
+                binding.hometownText.visibility = View.GONE
+                binding.highSchoolText.visibility = View.GONE
+            }
+
+            if (user.email == null && user.phone == null) {
+                binding.contactHeaderTextView.visibility = View.GONE
+                binding.emailTextView.visibility = View.GONE
+                binding.phoneTextView.visibility = View.GONE
+            } else {
+                binding.emailTextView.text = user.email
+                binding.phoneTextView.text = user.phone
+            }
+
+            user.profilePicUrl?.let {
+                Picasso
+                    .get()
+                    .load(user.profilePicUrl)
+                    .placeholder(R.drawable.ic_default_profile)
+                    .into(binding.profileImageView)
+            }
         }
 
-        binding.firstNameText.text = user?.firstName
-        binding.lastNameText.text = user?.lastName
-        if (user?.isPlayer() == true) {
-            binding.hometownText.text = user?.getHometownText()
-            binding.highSchoolText.text = user?.school
-        } else {
-            binding.hometownText.visibility = View.GONE
-            binding.highSchoolText.visibility = View.GONE
-        }
-
-        if (user?.email == null && user?.phone == null) {
-            binding.contactHeaderTextView.visibility = View.GONE
-            binding.emailTextView.visibility = View.GONE
-            binding.phoneTextView.visibility = View.GONE
-        } else {
-            binding.emailTextView.text = user?.email
-            binding.phoneTextView.text = user?.phone
-        }
-
-        user?.profilePicUrl?.let {
-            Picasso
-                .get()
-                .load(user.profilePicUrl)
-                .placeholder(R.drawable.ic_default_profile)
-                .into(binding.profileImageView)
-        }
 
 //        val videos = user?.videos
 //        videos?.let {

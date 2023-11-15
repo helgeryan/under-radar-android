@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.underradarandroid.DataClasses.Club
 import com.example.underradarandroid.DataClasses.User
+import com.example.underradarandroid.DataClasses.UserHelper
 import com.example.underradarandroid.R
 import com.example.underradarandroid.ui.clubs.ClubAdapter
 
@@ -36,7 +37,7 @@ class PlayerAdapter(private val playerList: Array<User>) : RecyclerView.Adapter<
         val player = playerList[position]
         holder.name.text = player.firstName + " " + player.lastName
 
-        holder.hometown.text = player.getHometownText()
+        holder.hometown.text = UserHelper(player).getHometownText()
         holder.gradYear.text = "${player.year}"
 
         if (player.collegeCommit == null) {
