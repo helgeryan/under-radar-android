@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import androidx.viewpager.widget.ViewPager
 import androidx.viewpager2.widget.ViewPager2
 import com.example.underradarandroid.R
@@ -33,27 +34,9 @@ class RegisterFragment(private val pager: ViewPager2, private val successComplet
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val usernameEditText = binding.username
-        val firstName = binding.firstNameText
-        val lastName = binding.lastNameText
-        val passwordEditText = binding.password
-        val loginButton = binding.login
-        val loadingProgressBar = binding.loading
-        val errorTextView = binding.errorTextView
-        val alreadySignedUpButton = binding.alreadySignedUpButton
-
-        loginButton.setOnClickListener {
-            errorTextView.visibility = View.GONE
-            loadingProgressBar.visibility = View.VISIBLE
-            AuthManager.createUser(usernameEditText.text.toString(), passwordEditText.text.toString(), firstName.text.toString(), lastName.text.toString(), 1) {
-                successCompletion()
-            }
-        }
-
-
-        alreadySignedUpButton.setOnClickListener {
-            showLoginFragment()
-        }
+        configureSignUpButton()
+        configureSpinner()
+        configureAlreadySignedUpButton()
     }
     private fun showLoginFragment() {
         pager.currentItem = 0
@@ -64,4 +47,64 @@ class RegisterFragment(private val pager: ViewPager2, private val successComplet
         _binding = null
     }
 
+    private fun getProfileType(): Int {
+        return binding.profileTypeSpinner.selectedItemPosition
+    }
+
+    private fun configureSpinner() {
+        val spinner = binding.profileTypeSpinner
+        val profileTypes = resources.getStringArray(R.array.profile_types)
+        if (spinner != null) {
+            context?.let {context ->
+                val adapter = ArrayAdapter(
+                    context,
+                    androidx.transition.R.layout.support_simple_spinner_dropdown_item, profileTypes
+                )
+                spinner.adapter = adapter
+            }
+        }
+    }
+
+    private fun configureAlreadySignedUpButton() {
+        val alreadySignedUpButton = binding.alreadySignedUpButton
+        alreadySignedUpButton.setOnClickListener {
+            showLoginFragment()
+        }
+    }
+
+    private fun configureSignUpButton() {
+
+        val usernameEditText = binding.username
+        val firstName = binding.firstNameText
+        val lastName = binding.lastNameText
+        val passwordEditText = binding.password
+        val confirmedPasswordEditText = binding.confirmedPassword
+        val loginButton = binding.login
+        val loadingProgressBar = binding.loading
+        val errorTextView = binding.errorTextView
+
+        loginButton.setOnClickListener {
+            val username = usernameEditText.text.toString()
+            val password = passwordEditText.text.toString()
+            val confirmPassword = confirmedPasswordEditText.text.toString()
+            val firstname = firstName.text.toString()
+            val lastname = lastName.text.toString()
+
+            errorTextView.visibility = View.GONE
+            loadingProgressBar.visibility = View.VISIBLE
+
+            if (username.isEmpty() ||
+                password.isEmpty() ||
+                firstname.isEmpty() ||
+                lastname.isEmpty() ||
+                confirmPassword != password) {
+                errorTextView.visibility = View.VISIBLE
+                loadingProgressBar.visibility = View.GONE
+                return@setOnClickListener
+            }
+            AuthManager.createUser(username, password, firstname, lastname, getProfileType()) {
+                successCompletion()
+            }
+        }
+    }
 }

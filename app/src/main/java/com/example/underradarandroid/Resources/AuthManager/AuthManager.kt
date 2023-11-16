@@ -50,7 +50,7 @@ object AuthManager {
         auth.createUserWithEmailAndPassword(email, password)
             .addOnSuccessListener { result ->
                 userSession = result.user
-                val user = User(result.user!!.uid, firstName, lastName, email, "", 1)
+                val user = User(result.user!!.uid, firstName, lastName, email, "", profileType)
                 Firebase.firestore.collection(DatabaseManager.usersCollection).document(user.id)
                     .set(user)
                     .addOnSuccessListener {

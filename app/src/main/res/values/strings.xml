@@ -21,4 +21,12 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
+
+    <string-array name="profile_types">
+        <item>High School Player</item>
+        <item>Juco Player</item>
+        <item>College Coach</item>
+        <item>Club Coach</item>
+        <item>General Coach (HS or Trainer)</item>
+    </string-array>
 </resources>
