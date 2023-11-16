@@ -18,4 +18,5 @@
     <color name="valid">#FF00DE00</color>
     <color name="invalid">#FFde0000</color>
     <color name="video">#FFde0000</color>
+    <color name="transparent">#00000000</color>
 </resources>

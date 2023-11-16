@@ -3,6 +3,7 @@ package com.example.underradarandroid.Resources.DatabaseManager
 import com.example.underradarandroid.DataClasses.Club
 import android.util.Log
 import com.example.underradarandroid.DataClasses.User
+import com.example.underradarandroid.DataClasses.UserHelper
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import java.io.Serializable
@@ -27,13 +28,13 @@ fun DatabaseManager.getClubs() {
 
 fun DatabaseManager.getPlayersForClub(id: String): Array<User>? {
     return usersObservable.value?.filter() { user ->
-        user.club == id && user.isPlayer()
+        user.club == id && UserHelper(user).isPlayer()
     }?.toTypedArray()
 }
 
 fun DatabaseManager.getCoachesForClub(id: String): Array<User>? {
     return usersObservable.value?.filter() { user ->
-        user.club == id && user.isCoach()
+        user.club == id && UserHelper(user).isCoach()
     }?.toTypedArray()
 }
 

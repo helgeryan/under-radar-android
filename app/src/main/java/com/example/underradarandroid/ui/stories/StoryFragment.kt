@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import com.example.underradarandroid.DataClasses.Story
+import com.example.underradarandroid.DataClasses.UserHelper
 import com.example.underradarandroid.Resources.DatabaseManager.DatabaseManager
 import com.example.underradarandroid.Resources.DatabaseManager.getUserForId
 import com.example.underradarandroid.Resources.Extensions.UnderRadarDateFormatter
@@ -47,9 +48,10 @@ class StoryFragment : Fragment() {
         } else {
             binding.authorTextView.visibility = View.VISIBLE
             story?.authorId?.let {
-                Log.d("UR Logging", DatabaseManager.getUserForId(story.authorId)?.getName() ?: "missing name")
-
-                binding.authorTextView.text = DatabaseManager.getUserForId(story.authorId)?.getName()
+                val user = DatabaseManager.getUserForId(story.authorId)
+                user?.let {
+                    binding.authorTextView.text = UserHelper(user).getName()
+                }
             }
         }
         binding.desciptionTextView.text = story?.description

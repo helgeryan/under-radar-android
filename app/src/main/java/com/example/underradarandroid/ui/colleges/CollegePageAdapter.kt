@@ -19,19 +19,19 @@ class CollegePageAdapter( fm: Fragment, val college: College): FragmentStateAdap
         when(position) {
             0 -> {
                 val collegePlayers = DatabaseManager.getPlayersForCollege(college.id)
-                return PlayerListFragment(collegePlayers)
+                return PlayerListFragment(collegePlayers, "No players at this time")
             }
             1 -> {
                 val collegeCoaches = DatabaseManager.getCoachesForCollege(college.id)
-                return PlayerListFragment(collegeCoaches)
+                return PlayerListFragment(collegeCoaches, "No coaches at this time")
             }
             2 -> {
                 val collegeCommitments = DatabaseManager.getCommitmentsForCollege(college.id)
-                return PlayerListFragment(collegeCommitments)
+                return PlayerListFragment(collegeCommitments, "No commitments at this time")
             }
             else -> {
                 val collegeCoaches = DatabaseManager.getCoachesForCollege(college.id)
-                return PlayerListFragment(collegeCoaches)
+                return PlayerListFragment(collegeCoaches, "No coaches at this time")
             }
         }
     }

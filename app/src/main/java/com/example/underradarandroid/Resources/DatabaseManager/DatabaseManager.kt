@@ -17,6 +17,7 @@ object DatabaseManager {
      const val collegesCollection: String = "colleges"
      const val savedEventsCollection: String = "savedEvents"
      const val notificationsCollection: String = "notifications"
+     const val bookmarksCollection: String = "bookmarks"
 
      var eventsObservable = MutableLiveData<Array<Event>>()
      val readEvents : LiveData<Array<Event>> get() = eventsObservable
@@ -35,6 +36,8 @@ object DatabaseManager {
      val readStories: LiveData<Array<Story>> get() = storiesObservable
      var conferencesObservable = MutableLiveData<Array<CollegeConference>>()
      val readConferences: LiveData<Array<CollegeConference>> get() = conferencesObservable
+     var bookmarksObservable = MutableLiveData<Array<Bookmark>>()
+     val readBookmarks: LiveData<Array<Bookmark>> get() = bookmarksObservable
 
      init {
 
@@ -50,5 +53,6 @@ object DatabaseManager {
 
           getNotifications("qyq883mpZqQlxjkBV2RcSdio4eV2")
           getSavedEvents("qyq883mpZqQlxjkBV2RcSdio4eV2")
+          getBookmarks("qyq883mpZqQlxjkBV2RcSdio4eV2")
      }
 }

@@ -1,21 +1,21 @@
-package com.example.underradarandroid.ui.players
+package com.example.underradarandroid.ui.bookmarks
 
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.example.underradarandroid.DataClasses.Club
+import com.example.underradarandroid.DataClasses.Bookmark
 import com.example.underradarandroid.DataClasses.User
 import com.example.underradarandroid.DataClasses.UserHelper
 import com.example.underradarandroid.R
-import com.example.underradarandroid.ui.clubs.ClubAdapter
+import com.example.underradarandroid.Resources.DatabaseManager.DatabaseManager
+import com.example.underradarandroid.Resources.DatabaseManager.getUserForId
 
-class PlayerAdapter(private val playerList: Array<User>) : RecyclerView.Adapter<com.example.underradarandroid.ui.players.PlayerAdapter.MyViewHolder>() {
-    var onClickListener: PlayerAdapter.OnClickListener? = null
+
+class BookmarksAdapter(private val bookmarkList: Array<Bookmark>) : RecyclerView.Adapter<BookmarksAdapter.MyViewHolder>() {
+    var onClickListener: BookmarksAdapter.OnClickListener? = null
 
     // This method creates a new ViewHolder object for each item in the RecyclerView
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -28,42 +28,47 @@ class PlayerAdapter(private val playerList: Array<User>) : RecyclerView.Adapter<
     // This method returns the total
     // number of items in the data set
     override fun getItemCount(): Int {
-        return playerList.size
+
+        return bookmarkList.size
     }
 
     // This method binds the data to the ViewHolder object
     // for each item in the RecyclerView
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val player = playerList[position]
-        holder.name.text = player.firstName + " " + player.lastName
+        val bookmark = bookmarkList[position]
+        val player = DatabaseManager.getUserForId(bookmark.bookmarkUserId)
 
-        holder.hometown.text = UserHelper(player).getHometownText()
-        holder.gradYear.text = "${player.year}"
+        player?.let {
+            holder.name.text = player.firstName + " " + player.lastName
 
-        if (player.collegeCommit == null) {
-            holder.commitImageView.visibility = View.GONE
-        } else {
-            holder.commitImageView.visibility = View.VISIBLE
-        }
-        if (player.videos == null) {
-            holder.videoImageView.visibility = View.GONE
-        } else {
-            holder.videoImageView.visibility = View.VISIBLE
-        }
-        if (player.scoutInfo == null) {
-            holder.verifiedImageView.visibility = View.GONE
-        } else {
-            holder.verifiedImageView.visibility = View.VISIBLE
-        }
-        if (player.hometown == null) {
-            holder.hometown.visibility = View.GONE
-        } else {
-            holder.hometown.visibility = View.VISIBLE
-        }
+            holder.hometown.text = UserHelper(player).getHometownText()
+            holder.gradYear.text = "${player.year}"
 
-        holder.itemView.setOnClickListener {
-            if (onClickListener != null) {
-                onClickListener!!.onClick(position, player)
+            if (player.collegeCommit == null) {
+                holder.commitImageView.visibility = View.GONE
+            } else {
+                holder.commitImageView.visibility = View.VISIBLE
+            }
+            if (player.videos == null) {
+                holder.videoImageView.visibility = View.GONE
+            } else {
+                holder.videoImageView.visibility = View.VISIBLE
+            }
+            if (player.scoutInfo == null) {
+                holder.verifiedImageView.visibility = View.GONE
+            } else {
+                holder.verifiedImageView.visibility = View.VISIBLE
+            }
+            if (player.hometown == null) {
+                holder.hometown.visibility = View.GONE
+            } else {
+                holder.hometown.visibility = View.VISIBLE
+            }
+
+            holder.itemView.setOnClickListener {
+                if (onClickListener != null) {
+                    onClickListener!!.onClick(position, player)
+                }
             }
         }
     }
