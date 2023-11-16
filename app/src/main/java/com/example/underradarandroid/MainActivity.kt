@@ -78,21 +78,23 @@ class MainActivity : AppCompatActivity() {
         handleDeepLink()
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.options_menu, menu)
+    // IF WE WERE TO USER THE OPTIONS MENU (TOP RIGHT BAR MENU ITEM)
+//    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+//        menuInflater.inflate(R.menu.options_menu, menu)
+//
+//        return true
+//    }
+//
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        return if (item.itemId == R.id.termsAndConditions) {
+//            val action = NavGraphDirections.actionGlobalTermsFragment()
+//            navController.navigate(action)
+//            true
+//        } else {
+//            item.onNavDestinationSelected(navController) || super.onOptionsItemSelected(item)
+//        }
+//    }
 
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return if (item.itemId == R.id.termsAndConditions) {
-            val action = NavGraphDirections.actionGlobalTermsFragment()
-            navController.navigate(action)
-            true
-        } else {
-            item.onNavDestinationSelected(navController) || super.onOptionsItemSelected(item)
-        }
-    }
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }

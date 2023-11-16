@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:src="@drawable/ic_default_profile"
+        android:src="@drawable/utr_logo"
         />
 
     <EditText
@@ -66,28 +66,35 @@
         android:gravity="left"
         android:visibility="gone"
         />
-
-    <Button
-        android:id="@+id/login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="48dp"
-        android:layout_marginBottom="64dp"
-        android:text="Sign In"
-        android:textAllCaps="false"
-        android:textSize="14sp"
-        android:drawableRight="@drawable/ic_arrow_right"
-        android:drawableTint="@color/white"
-        android:textColor="@color/white"
-        android:background="@color/utrBlue"
-        android:fontFamily="@font/mont_semibold"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/loginButtonCard"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        app:cardCornerRadius="8dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="10dp"
+        android:backgroundTint="@color/utrBlue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password"
-        app:layout_constraintVertical_bias="0.2" />
+        app:layout_constraintTop_toBottomOf="@+id/errorTextView"
+        >
+
+        <Button
+            android:id="@+id/login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Sign In"
+            android:textAllCaps="false"
+            android:textSize="14sp"
+            android:drawableRight="@drawable/ic_arrow_right"
+            android:drawableTint="@color/white"
+            android:textColor="@color/white"
+            android:background="@color/transparent"
+            android:fontFamily="@font/mont_semibold" />
+
+    </androidx.cardview.widget.CardView>
 
     <Button
         android:id="@+id/newUserButton"
@@ -107,7 +114,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login"
+        app:layout_constraintTop_toBottomOf="@+id/loginButtonCard"
         app:layout_constraintVertical_bias="0.2" />
 
     <ProgressBar

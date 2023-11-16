@@ -38,8 +38,20 @@ class AuthFragment(private val pager: ViewPager2, private val successCompletion:
         val signUpButton = binding.newUserButton
 
         loginButton.setOnClickListener {
+
+            val username = usernameEditText.text.toString()
+            val password = passwordEditText.text.toString()
+
             errorTextView.visibility = View.GONE
             loadingProgressBar.visibility = View.VISIBLE
+
+            if (username.isEmpty() ||
+                password.isEmpty()) {
+                errorTextView.visibility = View.VISIBLE
+                loadingProgressBar.visibility = View.GONE
+                return@setOnClickListener
+            }
+
             AuthManager.login(usernameEditText.text.toString(), passwordEditText.text.toString()) { success ->
                 loadingProgressBar.visibility = View.INVISIBLE
                 if (success) {
