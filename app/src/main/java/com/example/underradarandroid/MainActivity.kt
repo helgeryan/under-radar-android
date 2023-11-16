@@ -63,6 +63,10 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNav.setupWithNavController(navController)
         binding.navView.setupWithNavController(navController)
 
+        binding.signoutButton.setOnClickListener {
+            AuthManager.logout()
+            binding.drawerLayout.close()
+        }
         configureDrawerMenu()
 
         AuthManager.readUser.observe(this) { user ->
@@ -71,7 +75,6 @@ class MainActivity : AppCompatActivity() {
             configureDrawerMenu(user)
         }
 
-        AuthManager.logout()
         handleDeepLink()
     }
 
@@ -109,23 +112,21 @@ class MainActivity : AppCompatActivity() {
         val emailTextView: TextView = headerView.findViewById(R.id.emailTextView)
         val profilePicImageView: ImageView = headerView.findViewById(R.id.profileImageView)
         if (user == null) {
+            profilePicImageView.setImageResource(R.drawable.ic_default_profile)
             button.visibility = View.VISIBLE
             nameTextView.visibility = View.GONE
             emailTextView.visibility = View.GONE
+            binding.signoutButton.visibility = View.GONE
         } else {
             button.visibility = View.GONE
             nameTextView.visibility = View.VISIBLE
             emailTextView.visibility = View.VISIBLE
+            binding.signoutButton.visibility = View.VISIBLE
         }
         button.setOnClickListener {
-            if (AuthManager.readUser.value != null) {
-                AuthManager.logout()
-            } else {
-                val modal = AuthManagerFragment()
-
-                supportFragmentManager.let { modal.show(it, AuthManagerFragment.TAG) }
-                binding.drawerLayout.close()
-            }
+            val modal = AuthManagerFragment()
+            supportFragmentManager.let { modal.show(it, AuthManagerFragment.TAG) }
+            binding.drawerLayout.close()
         }
         user?.let {
             nameTextView.text = UserHelper(user).getName()

@@ -49,7 +49,25 @@
         app:itemTextAppearance="@style/tab_font"
         app:itemIconTint="@color/textGray"
         android:background="@color/white"
-        />
+        >
+
+        <Button
+            android:id="@+id/signout_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginBottom="15dp"
+            android:textSize="15sp"
+            android:fontFamily="@font/mont_semibold"
+            android:drawablePadding="5dp"
+            android:text="Sign out"
+            android:drawableLeft="@drawable/ic_logout"
+            android:background="@color/transparent"
+            android:textColor="@color/utrBlue"
+            android:drawableTint="@color/utrBlue"
+            android:layout_gravity="bottom"
+            />
+    </com.google.android.material.navigation.NavigationView>
 
 </androidx.drawerlayout.widget.DrawerLayout>
 
