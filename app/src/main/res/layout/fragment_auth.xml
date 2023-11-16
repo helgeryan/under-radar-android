@@ -97,14 +97,48 @@
     </androidx.cardview.widget.CardView>
 
     <Button
+        android:id="@+id/privacyPolicyButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginStart="48dp"
+        android:layout_marginEnd="48dp"
+        android:text="Privacy Policy"
+        android:textAllCaps="false"
+        android:textSize="12sp"
+        android:background="@color/transparent"
+        android:textColor="@color/utrBlue"
+        android:fontFamily="@font/mont_semibold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loginButtonCard"
+        app:layout_constraintVertical_bias="0.2" />
+
+    <Button
+        android:id="@+id/termsButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginStart="48dp"
+        android:layout_marginEnd="48dp"
+        android:text="Terms &amp; Conditions"
+        android:textAllCaps="false"
+        android:textSize="12sp"
+        android:background="@color/transparent"
+        android:textColor="@color/utrBlue"
+        android:fontFamily="@font/mont_semibold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/privacyPolicyButton"
+        app:layout_constraintVertical_bias="0.5" />
+
+    <Button
         android:id="@+id/newUserButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
         android:layout_marginStart="48dp"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="48dp"
-        android:layout_marginBottom="64dp"
         android:text="Need an account? Sign up"
         android:textAllCaps="false"
         android:textSize="12sp"
@@ -114,8 +148,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginButtonCard"
-        app:layout_constraintVertical_bias="0.2" />
+        app:layout_constraintTop_toBottomOf="@+id/termsButton"
+        app:layout_constraintVertical_bias="1" />
 
     <ProgressBar
         android:id="@+id/loading"

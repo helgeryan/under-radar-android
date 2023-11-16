@@ -79,7 +79,7 @@ class RegisterFragment(private val pager: ViewPager2, private val successComplet
         val lastName = binding.lastNameText
         val passwordEditText = binding.password
         val confirmedPasswordEditText = binding.confirmedPassword
-        val loginButton = binding.login
+        val loginButton = binding.signinButton
         val loadingProgressBar = binding.loading
         val errorTextView = binding.errorTextView
 
@@ -90,16 +90,16 @@ class RegisterFragment(private val pager: ViewPager2, private val successComplet
             val firstname = firstName.text.toString()
             val lastname = lastName.text.toString()
 
-            errorTextView.visibility = View.GONE
-            loadingProgressBar.visibility = View.VISIBLE
+//            errorTextView.visibility = View.INVISIBLE
+//            loadingProgressBar.visibility = View.VISIBLE
 
             if (username.isEmpty() ||
                 password.isEmpty() ||
                 firstname.isEmpty() ||
                 lastname.isEmpty() ||
                 confirmPassword != password) {
-                errorTextView.visibility = View.VISIBLE
-                loadingProgressBar.visibility = View.GONE
+//                errorTextView.visibility = View.VISIBLE
+//                loadingProgressBar.visibility = View.INVISIBLE
                 return@setOnClickListener
             }
             AuthManager.createUser(username, password, firstname, lastname, getProfileType()) {

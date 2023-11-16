@@ -1,5 +1,6 @@
 package com.example.underradarandroid.ui.login
 
+import android.net.Uri
 import androidx.fragment.app.Fragment
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,9 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.viewpager2.widget.ViewPager2
 import com.example.underradarandroid.Resources.AuthManager.AuthManager
+import com.example.underradarandroid.Resources.UnderRadarFragment
 import com.example.underradarandroid.databinding.FragmentAuthBinding
 
-class AuthFragment(private val pager: ViewPager2, private val successCompletion: () -> Unit) : Fragment() {
+class AuthFragment(private val pager: ViewPager2, private val successCompletion: () -> Unit) : UnderRadarFragment() {
     private var _binding: FragmentAuthBinding? = null
 
     // This property is only valid between onCreateView and
@@ -62,6 +64,15 @@ class AuthFragment(private val pager: ViewPager2, private val successCompletion:
             }
         }
 
+        binding.privacyPolicyButton.setOnClickListener {
+            val uri = Uri.parse("https://firebasestorage.googleapis.com:443/v0/b/underradar-2.appspot.com/o/Privacy%20Policy.pdf?alt=media&token=d4374386-3e9b-4580-940a-68ab82c18f02")
+            openLink(uri)
+        }
+
+        binding.termsButton.setOnClickListener {
+            val uri = Uri.parse("https://firebasestorage.googleapis.com:443/v0/b/underradar-2.appspot.com/o/Terms%20%26%20Conditions.pdf?alt=media&token=b3256e64-4fb0-4ea4-9848-79766967e5ce")
+            openLink(uri)
+        }
 
         signUpButton.setOnClickListener {
             showRegisterFragment()
