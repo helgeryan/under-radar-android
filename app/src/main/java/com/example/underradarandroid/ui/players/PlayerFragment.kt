@@ -2,6 +2,7 @@ package com.example.underradarandroid.ui.players
 
 import android.content.Context
 import android.media.MediaController2
+import android.media.MediaPlayer
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -10,12 +11,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.MediaController
 import android.widget.TextView
 import android.widget.VideoView
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.Orientation
 import com.example.underradarandroid.DataClasses.College
 import com.example.underradarandroid.DataClasses.User
 import com.example.underradarandroid.DataClasses.UserHelper
@@ -52,7 +55,8 @@ class PlayerFragment : Fragment() {
             binding.firstNameText.text = user.firstName
             binding.lastNameText.text = user.lastName
             binding.hometownText.text = UserHelper(user).getHometownText()
-            binding.highSchoolText.text = user.school
+            val school = user.school
+            binding.highSchoolText.text = "High School: $school"
 
             user.profilePicUrl?.let {
                 Picasso
@@ -67,6 +71,7 @@ class PlayerFragment : Fragment() {
                 val videoAdapter = PlayerVideoAdapter(videos.toTypedArray(), context)
                 val recyclerView = binding.videoRecyclerView
                 val layoutManager = LinearLayoutManager(context)
+                layoutManager.orientation = RecyclerView.HORIZONTAL
                 recyclerView.layoutManager = layoutManager
                 recyclerView.adapter = videoAdapter
             }
@@ -91,32 +96,31 @@ class PlayerVideoAdapter(private val videoList: Array<Video>, private val contex
     // This method returns the total
     // number of items in the data set
     override fun getItemCount(): Int {
-        return 10
+        return videoList.size
     }
 
     // This method binds the data to the ViewHolder object
     // for each item in the RecyclerView
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val video = videoList.first()
-//        val uri: Uri = Uri.parse(video.videoUrl)
-//        holder.videoView.setVideoURI(uri)
-//
-//        // creating object of
-//        // media controller class
-//        val mediaController = MediaController(context)
-//
-//        // sets the anchor view
-//        // anchor view for the videoView
-//        mediaController.setAnchorView(holder.videoView);
-//
-//        // sets the media player to the videoView
-//        mediaController.setMediaPlayer(holder.videoView);
-//
-//        // sets the media controller to the videoView
-//        holder.videoView.setMediaController(mediaController);
-//
-//        // starts the video
-//        holder.videoView.start();
+        val uri: Uri = Uri.parse(video.videoUrl)
+        holder.videoView.setVideoURI(uri)
+
+        // creating object of
+        // media controller class
+        val mediaController = MediaController(context)
+
+        // sets the anchor view
+        // anchor view for the videoView
+        mediaController.setAnchorView(holder.videoView);
+
+        // sets the media player to the videoView
+        mediaController.setMediaPlayer(holder.videoView);
+
+        // sets the media controller to the videoView
+        holder.videoView.setMediaController(mediaController);
+        // starts the video
+        holder.videoView.start();
     }
 
     // onClickListener Interface
