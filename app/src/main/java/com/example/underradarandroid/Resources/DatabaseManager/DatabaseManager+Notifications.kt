@@ -12,7 +12,7 @@ fun DatabaseManager.getNotifications(userId: String) {
             try {
                 notificationsObservable.value = result.toObjects(UserNotification::class.java).toTypedArray()
 
-                Log.d("UR Logging Notifications", notificationsObservable.value?.size.toString())
+                Log.d("UR Logging Notifications", notificationsObservable.value!!.toString())
             } catch (e: RuntimeException) {
                 Log.d("Error", e.message.toString())
             }
@@ -22,4 +22,11 @@ fun DatabaseManager.getNotifications(userId: String) {
         .addOnFailureListener { error ->
             print("Error")
         }
+}
+
+fun DatabaseManager.markNotificationsAsRead(notifications: Array<UserNotification>, completion: () -> Unit) {
+    for (notification in notifications) {
+        Firebase.firestore.collection(DatabaseManager.notificationsCollection).document(notification.id).update("isRead", true)
+    }
+    completion()
 }

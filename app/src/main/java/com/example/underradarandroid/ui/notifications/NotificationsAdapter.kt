@@ -1,7 +1,10 @@
 package com.example.underradarandroid.ui.notifications
 
+import android.annotation.SuppressLint
+import android.graphics.Color
 import android.graphics.PorterDuff
 import android.os.Build
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -41,11 +44,12 @@ class NotificationsAdapter(private val notifications: Array<UserNotification>) :
         val color = ContextCompat.getColor(holder.iconImageView.context, R.color.utrBlue)
         holder.iconImageView.setColorFilter(color, PorterDuff.Mode.SRC_ATOP)
         holder.iconImageView.setImageResource(notification.getIcon())
-        if (!notification.isRead) {
-            holder.itemView.setBackgroundResource(R.color.unreadNotificationColor)
+        Log.d("Notification Log", notification.isRead.toString())
+        if (notification.isRead) {
+
+        } else {
+            holder.itemView.setBackgroundColor(Color.LTGRAY)
         }
-
-
     }
 
     // onClickListener Interface

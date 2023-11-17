@@ -17,9 +17,12 @@ import com.example.underradarandroid.DataClasses.College
 import com.example.underradarandroid.DataClasses.UserNotification
 import com.example.underradarandroid.NavGraphDirections
 import com.example.underradarandroid.R
+import com.example.underradarandroid.Resources.AuthManager.AuthManager
 import com.example.underradarandroid.Resources.DatabaseManager.DatabaseManager
+import com.example.underradarandroid.Resources.DatabaseManager.getNotifications
 import com.example.underradarandroid.Resources.DatabaseManager.hasCoaches
 import com.example.underradarandroid.Resources.DatabaseManager.hasCommits
+import com.example.underradarandroid.Resources.DatabaseManager.markNotificationsAsRead
 import com.example.underradarandroid.databinding.FragmentCollegeListBinding
 import com.example.underradarandroid.databinding.FragmentNotificationsBinding
 import com.example.underradarandroid.ui.colleges.CollegeListViewModel
@@ -67,4 +70,15 @@ class NotificationsFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_notifications, container, false)
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        val notifications = DatabaseManager.readNotifications.value
+        notifications?.let {
+            DatabaseManager.markNotificationsAsRead(notifications) {
+                if (AuthManager.readUser.value != null) {
+                    DatabaseManager.getNotifications(AuthManager.readUser.value!!.id)
+                }
+            }
+        }
+    }
 }
