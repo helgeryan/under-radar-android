@@ -12,6 +12,8 @@ import com.example.underradarandroid.DataClasses.Club
 import com.example.underradarandroid.DataClasses.User
 import com.example.underradarandroid.DataClasses.UserHelper
 import com.example.underradarandroid.R
+import com.example.underradarandroid.Resources.DatabaseManager.DatabaseManager
+import com.example.underradarandroid.Resources.DatabaseManager.getCollegeForId
 import com.example.underradarandroid.ui.clubs.ClubAdapter
 
 class PlayerAdapter(private val playerList: Array<User>) : RecyclerView.Adapter<com.example.underradarandroid.ui.players.PlayerAdapter.MyViewHolder>() {
@@ -37,8 +39,6 @@ class PlayerAdapter(private val playerList: Array<User>) : RecyclerView.Adapter<
         val player = playerList[position]
         holder.name.text = player.firstName + " " + player.lastName
 
-        holder.hometown.text = UserHelper(player).getHometownText()
-        holder.gradYear.text = "${player.year}"
 
         if (player.collegeCommit == null) {
             holder.commitImageView.visibility = View.GONE
@@ -55,10 +55,24 @@ class PlayerAdapter(private val playerList: Array<User>) : RecyclerView.Adapter<
         } else {
             holder.verifiedImageView.visibility = View.VISIBLE
         }
-        if (player.hometown == null) {
-            holder.hometown.visibility = View.GONE
+        if (UserHelper(player).isPlayer()) {
+            if (player.hometown == null) {
+                holder.hometown.visibility = View.GONE
+            } else {
+                holder.hometown.text = UserHelper(player).getHometownText()
+                holder.hometown.visibility = View.VISIBLE
+            }
+
+            holder.gradYear.text = "${player.year}"
         } else {
-            holder.hometown.visibility = View.VISIBLE
+            holder.gradYear.visibility = View.GONE
+            if (player.college == null) {
+                holder.hometown.visibility = View.GONE
+            } else {
+                val college = DatabaseManager.getCollegeForId(player.college!!)
+                holder.hometown.text = college?.name
+                holder.hometown.visibility = View.VISIBLE
+            }
         }
 
         holder.itemView.setOnClickListener {

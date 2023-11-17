@@ -2,6 +2,7 @@ package com.example.underradarandroid.Resources.DatabaseManager
 
 import android.util.Log
 import com.example.underradarandroid.DataClasses.College
+import com.example.underradarandroid.DataClasses.Event
 import com.example.underradarandroid.DataClasses.User
 import com.example.underradarandroid.DataClasses.UserHelper
 import com.google.firebase.firestore.ktx.firestore
@@ -23,6 +24,10 @@ fun DatabaseManager.getColleges() {
         .addOnFailureListener { error ->
             print("Error")
         }
+}
+
+fun DatabaseManager.getCollegeForId(id: String): College? {
+    return collegesObservable.value?.firstOrNull() { id == it.id }
 }
 
 fun DatabaseManager.getPlayersForCollege(id: String): Array<User>? {

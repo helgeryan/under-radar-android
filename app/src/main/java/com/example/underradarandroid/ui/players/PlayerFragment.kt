@@ -24,6 +24,8 @@ import com.example.underradarandroid.DataClasses.User
 import com.example.underradarandroid.DataClasses.UserHelper
 import com.example.underradarandroid.DataClasses.Video
 import com.example.underradarandroid.R
+import com.example.underradarandroid.Resources.DatabaseManager.DatabaseManager
+import com.example.underradarandroid.Resources.DatabaseManager.getCollegeForId
 import com.example.underradarandroid.databinding.FragmentCollegeBinding
 import com.example.underradarandroid.databinding.FragmentPlayerBinding
 import com.squareup.picasso.Picasso
@@ -57,6 +59,22 @@ class PlayerFragment : Fragment() {
             binding.hometownText.text = UserHelper(user).getHometownText()
             val school = user.school
             binding.highSchoolText.text = "High School: $school"
+
+
+
+            if (UserHelper(user).isPlayer()) {
+                if (user.hometown == null) {
+                    binding.hometownText.visibility = View.GONE
+                } else {
+                    binding.hometownText.text = UserHelper(user).getHometownText()
+                    binding.hometownText.visibility = View.VISIBLE
+                }
+            } else {
+                binding.highSchoolText.visibility = View.GONE
+                binding.hometownText.visibility = View.GONE
+                binding.yearText.visibility = View.GONE
+            }
+
 
             user.profilePicUrl?.let {
                 Picasso

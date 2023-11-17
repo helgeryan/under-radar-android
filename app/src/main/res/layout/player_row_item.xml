@@ -90,7 +90,7 @@
             android:textColor="@color/textGray"
             android:textSize="14sp"
             android:fontFamily="@font/mont_semibold"
-            tools:text="Location" />
+            tools:text="Minnetonka, MN" />
 
         <!--TextView for displaying Email -->
         <TextView
@@ -101,7 +101,7 @@
             android:textColor="@color/textGray"
             android:textSize="12sp"
             android:fontFamily="@font/mont_semibold"
-            tools:text="Division" />
+            tools:text="2023" />
 
 
     </LinearLayout>
